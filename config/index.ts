@@ -9,7 +9,7 @@ const config = {
     375: 2 / 1
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: '../../../../mnt/d/subao',
   plugins: ['@tarojs/plugin-html'],
   defineConstants: {
   },
