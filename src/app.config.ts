@@ -26,6 +26,12 @@ export default defineAppConfig({
         "selectedIconPath": './icon/home-fill.png'
       },
       {
+        "pagePath": "pages/node/new",
+        "text": "新增",
+        "iconPath": './icon/plus-circle.png',
+        "selectedIconPath": './icon/plus-circle-fill.png'
+      },
+      {
         "pagePath": "pages/me/index",
         "text": "我的",
         "iconPath": './icon/account.png',
