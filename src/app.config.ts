@@ -33,7 +33,7 @@ export default defineAppConfig({
       },
       {
         "pagePath": "pages/me/index",
-        "text": "我的",
+        "text": "我",
         "iconPath": './icon/account.png',
         "selectedIconPath": './icon/account-fill.png'
       },
