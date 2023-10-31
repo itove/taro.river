@@ -1,9 +1,9 @@
 import  React, { useState  } from "react";
-import { View } from '@tarojs/components'
+import { View, Form } from '@tarojs/components'
 import './index.scss'
 import {
   Cell,
-  Form,
+  NutForm,
   Picker,
 	Uploader,
   Button,
@@ -35,67 +35,73 @@ function Index() {
     console.log(values[0])
   }
 
-  function submit() {
+  const formSubmit = e => {
+    console.log(e)
     console.log('fuck')
   }
 
   return (
     <View className="nutui-react-demo">
       <View className="index">
-      <Form
-        labelPosition="right"
-        footer={
-          <>
-            <Button formType="submit" block type="primary" onClick={submit}>
-              提交
-            </Button>
-          </>
-        }
-      >
-        <Cell title="请选择类型" extra={type.text} onClick={() => setVisible(!visible)} />
-        <Picker
-          visible={visible}
-          options={types}
-          onConfirm={(list, values) => confirmPicker(list, values)}
-          onClose={() => setVisible(false)}
-          onChange={changePicker}
-         />
-
-        <Form.Item
-          required
-          label="标题"
-          name="title"
-          rules={[
-            { max: 25, message: '标题不能超过25个字' },
-            { required: true, message: '请输入标题' },
-          ]}
-        >
-          <Input
-            className="nut-input-text"
-            placeholder="请输入标题"
-            type="text"
-          />
-        </Form.Item>
-        <Form.Item
-          label="正文"
-          name="body"
-					autoSize="true"
-          rules={[
-            { min: 10, message: '正文不能少于10个字' },
-            { required: true, message: '请输入正文' },
-          ]}
-        >
-          <TextArea placeholder="请输入正文" maxLength={1000} />
-        </Form.Item>
-       <Form.Item
-          label="申请书图片"
-          name="files"
-        >
-          <Uploader
-            url="https://my-json-server.typicode.com/linrufeng/demo/posts" />
-        </Form.Item>
-
+       <Form
+       onSubmit={formSubmit}
+       >
+      <Button formType="submit" block type="primary">提交</Button>
       </Form>
+      // <Form
+      //   labelPosition="right"
+      //   onSubmit={formSubmit}
+      //   footer={
+      //     <>
+      //       <Button formType="submit" block type="primary">
+      //         提交
+      //       </Button>
+      //     </>
+      //   }
+      // >
+      //   <Cell title="请选择类型" extra={type.text} onClick={() => setVisible(!visible)} />
+      //   <Picker
+      //     visible={visible}
+      //     options={types}
+      //     onConfirm={(list, values) => confirmPicker(list, values)}
+      //     onClose={() => setVisible(false)}
+      //     onChange={changePicker}
+      //    />
+
+      //   <Form.Item
+      //     required
+      //     label="标题"
+      //     name="title"
+      //     rules={[
+      //       { max: 25, message: '标题不能超过25个字' },
+      //       { required: true, message: '请输入标题' },
+      //     ]}
+      //   >
+      //     <Input
+      //       className="nut-input-text"
+      //       placeholder="请输入标题"
+      //       type="text"
+      //     />
+      //   </Form.Item>
+      //   <Form.Item
+      //     label="正文"
+      //     name="body"
+			// 		autoSize="true"
+      //     rules={[
+      //       { min: 10, message: '正文不能少于10个字' },
+      //       { required: true, message: '请输入正文' },
+      //     ]}
+      //   >
+      //     <TextArea placeholder="请输入正文" maxLength={1000} />
+      //   </Form.Item>
+      //  <Form.Item
+      //     label="申请书图片"
+      //     name="files"
+      //   >
+      //     <Uploader
+      //       url="https://my-json-server.typicode.com/linrufeng/demo/posts" />
+      //   </Form.Item>
+      // </Form>
       </View>
     </View>
   )
