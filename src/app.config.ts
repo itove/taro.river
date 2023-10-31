@@ -19,7 +19,7 @@ export default defineAppConfig({
     selectedColor: '#000000',
     list: [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/node/index",
         "text": "首页",
         "iconPath": './icon/home.png',
         "selectedIconPath": './icon/home-fill.png'
