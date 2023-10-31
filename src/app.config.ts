@@ -21,7 +21,7 @@ export default defineAppConfig({
     list: [
       {
         "pagePath": "pages/node/index",
-        "text": "首页",
+        "text": "案件",
         "iconPath": './icon/home.png',
         "selectedIconPath": './icon/home-fill.png'
       },
