@@ -5,13 +5,28 @@ import Taro from '@tarojs/taro'
 import './index.scss'
 import { Env } from '../../env'
 
+function goto() {
+  Taro.navigateTo({url: '/pages/node/new'})
+}
+
 function Index() {
+  let uid: int
+
   useEffect(() => {
     Taro.getStorage({
       key: Env.storageKey
     })
     .then(res => {
       console.log('logged in')
+      uid = res.data.id
+
+      // fetch my nodes
+      Taro.request({
+        url: Env.apiUrl + 'nodes?lawyer=' + uid
+      })
+      .then(res => {
+        console.log(res)
+      })
     })
     .catch(err => {
       console.log(err)
@@ -25,8 +40,8 @@ function Index() {
         欢迎使用 NutUI React 开发 Taro 多端项目。
       </View>
       <View className="index">
-        <Button type="primary" className="btn">
-          NutUI React Button
+        <Button type="primary" className="btn" onClick={goto}>
+          新增案件
         </Button>
       </View>
     </View>
