@@ -5,6 +5,7 @@ export default defineAppConfig({
     'pages/node/show',
     'pages/node/edit',
     'pages/me/index',
+    'pages/me/login',
     'pages/me/setting'
   ],
   window: {
