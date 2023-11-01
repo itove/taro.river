@@ -63,6 +63,7 @@ function Index() {
     <View className="">
       <View className="index">
       <Form
+        divider
         labelPosition="left"
         onSubmit={formSubmit}
         onFinish={(values) => formSubmit(values)}
@@ -95,6 +96,7 @@ function Index() {
           <Input
             className="nut-input-text"
             placeholder="请输入标题"
+            align="right"
             type="text"
           />
         </Form.Item>
