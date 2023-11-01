@@ -6,20 +6,13 @@ import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
-// const attrs = {
-//   name: 'jess',
-//   phone: '1329191',
-//   phone1: 'df29191'
-// }
-
 function goto() {
-  const link = '/pages/me/info'
+  const link = '/pages/node/index'
   Taro.navigateTo({ url: link })
 }
 
 function Index() {
-  // const [list, setList] = useState([])
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({firm: {name: ''}})
   let l = []
   let uid: int
 
@@ -36,7 +29,11 @@ function Index() {
       })
       .then(res => {
         console.log(res)
-        setUser(res.data)
+        let user = res.data
+        if (user.firm === undefined) {
+          user.firm = {name: ''}
+        }
+        setUser(user)
       })
     })
 
@@ -44,39 +41,36 @@ function Index() {
 
   return (
     <View className="">
-      <Row className="p-1 align-item-center">
-        <Col span="">
-          <Avatar
-            size="50"
-            src={user.avatar}
-          />
-        </Col>
-        <Col span="" className="ps-1">
-            <div className="ellipsis flex-content flex-content-light">{user.username}</div>
-            <div className="ellipsis flex-content flex-content-light">{user.name}</div>
-        </Col> 
-      </Row>
       <Cell.Group>
         <Cell
         className='nutui-cell--clickable'
-        title='个人信息'
+        title='头像'
         align='center'
-        extra={<Right size="12" />}
+        extra={<><Avatar size="22" className="me-1" src={user.avtar}/><Right size="12" /></>}
         onClick={goto}
         />
         <Cell
         className='nutui-cell--clickable'
-        title='我的收藏'
+        title='姓名'
         align='center'
-        extra={<Right size="12" />}
+        extra={<><span className="me-1">{user.name}</span><Right size="12" /></>}
         />
         <Cell
         className='nutui-cell--clickable'
-        title='设置'
+        title='手机'
         align='center'
-        extra={<Right size="12" />}
+        extra={<><span className="me-1">{user.phone}</span><Right size="12" /></>}
+        />
+        <Cell
+        className='nutui-cell--clickable'
+        title='律所'
+        align='center'
+        extra={<><span className="me-1">{user.firm.name}</span><Right size="12" /></>}
         />
       </Cell.Group>
+    <View className="p-1 fixed">
+      <Button className="btn" block>退出登录</Button>
+    </View>
     </View>
   )
 }
