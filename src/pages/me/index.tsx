@@ -52,7 +52,6 @@ function Index() {
           />
         </Col>
         <Col span="" className="ps-1">
-            <div className="ellipsis flex-content flex-content-light">{user.username}</div>
             <div className="ellipsis flex-content flex-content-light">{user.name}</div>
         </Col> 
       </Row>
