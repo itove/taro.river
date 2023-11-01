@@ -11,7 +11,7 @@ import {
   Input,
   TextArea
 } from '@nutui/nutui-react-taro'
-import { Right } from '@nutui/icons-react-taro'
+import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
@@ -136,7 +136,7 @@ function Index() {
 
         {othersList}
 
-        <Button block type="default" onClick={more}> 添加材料 </Button>
+        <Button block type="default" onClick={more} icon={<Plus size="16" />}> 添加材料 </Button>
 
         <Cell>正文</Cell>
         <Form.Item
