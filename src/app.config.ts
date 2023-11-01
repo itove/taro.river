@@ -27,7 +27,6 @@ export default defineAppConfig({
       },
       {
         "pagePath": "pages/node/new",
-        "text": "新增",
         "iconPath": './icon/plus-circle.png',
         "selectedIconPath": './icon/plus-circle-fill.png'
       },
