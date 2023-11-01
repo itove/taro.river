@@ -25,8 +25,14 @@ function Index() {
       .then(res => {
         console.log(res)
         let user = res.data
+        if (user.phone === undefined) {
+          user.phone = '填写手机号'
+        }
+        if (user.name === undefined) {
+          user.phone = '填写姓名'
+        }
         if (user.firm === undefined) {
-          user.firm = {name: ''}
+          user.firm = {name: '选择律所'}
         }
         setUser(user)
       })
