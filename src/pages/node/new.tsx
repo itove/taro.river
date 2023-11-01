@@ -19,6 +19,7 @@ function Index() {
   const [others, setOthers] = useState([])
   const [othersList, setOthersList] = useState([])
   const [count, setCount] = useState(1)
+  const [desc1, setDesc1] = useState('')
   const types = [
     [
       { value: 1, text: '南京市',},
@@ -34,10 +35,24 @@ function Index() {
 
   const confirmPicker = (options: PickerOption[], values: (string | number)[]) => {
     setType(options[0])
+    setDesc1('')
   }
 
   const formSubmit = v => {
-    console.log(v)
+    let data = v
+    // if type not selected
+    if (type.value === undefined) {
+      // show error msg and return
+      setDesc1('请选择类型')
+      console.log('select type')
+      return
+    }
+    //
+    // if app image not uploaded
+    // show error msg and return
+    
+    data.tid = type.value
+    console.log(data)
   }
 
   const more = () => {
@@ -75,7 +90,7 @@ function Index() {
           </>
         }
       >
-        <Cell title="请选择类型" extra={type.text} onClick={() => setVisible(!visible)} />
+        <Cell title="请选择类型" description={desc1} className="red-desc" extra={type.text} onClick={() => setVisible(!visible)} />
         <Picker
           visible={visible}
           options={types}
@@ -88,6 +103,7 @@ function Index() {
           // required
           label="标题"
           name="title"
+          className="err-on-right"
           rules={[
             { max: 25, message: '标题不能超过25个字' },
             { required: true, message: '请输入标题' },

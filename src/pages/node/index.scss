@@ -1,3 +1,11 @@
+.err-on-right{
+  --nutui-form-item-tip-text-align: right;
+}
+.red-desc{
+  // --nutui-cell-description-color: var(--nutui-form-item-error-message-color);
+  --nutui-cell-description-color: red;
+}
+
 .nut-uploader{
   justify-content: flex-end;
 }
