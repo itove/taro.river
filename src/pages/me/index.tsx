@@ -44,7 +44,7 @@ function Index() {
 
   return (
     <View className="">
-      <Row className="p-1">
+      <Row className="p-1 align-item-center">
         <Col span="">
           <Avatar
             size="50"
@@ -52,8 +52,8 @@ function Index() {
           />
         </Col>
         <Col span="" className="ps-1">
-            <div className="flex-content flex-content-light">{user.username}</div>
-            <div className="flex-content flex-content-light">{user.name}</div>
+            <div className="ellipsis flex-content flex-content-light">{user.username}</div>
+            <div className="ellipsis flex-content flex-content-light">{user.name}</div>
         </Col> 
       </Row>
       <Cell.Group>
@@ -61,20 +61,20 @@ function Index() {
         className='nutui-cell--clickable'
         title='个人信息'
         align='center'
-        extra={<Right />}
+        extra={<Right size="12" />}
         onClick={goto}
         />
         <Cell
         className='nutui-cell--clickable'
         title='我的收藏'
         align='center'
-        extra={<Right />}
+        extra={<Right size="12" />}
         />
         <Cell
         className='nutui-cell--clickable'
         title='设置'
         align='center'
-        extra={<Right />}
+        extra={<Right size="12" />}
         />
       </Cell.Group>
     </View>
