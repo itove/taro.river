@@ -85,7 +85,7 @@ function Index() {
          />
 
         <Form.Item
-          required
+          // required
           label="标题"
           name="title"
           rules={[
