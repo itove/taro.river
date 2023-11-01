@@ -120,7 +120,7 @@ function Index() {
               console.log('storeage removed failed');
             }
           })
-          Taro.redirectTo({ url: '/pages/me/login'})
+          Taro.reLaunch({ url: '/pages/me/login'})
         } else if (res.cancel) {
         }
       }
