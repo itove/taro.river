@@ -54,25 +54,25 @@ function Index() {
         className='nutui-cell--clickable'
         title='头像'
         align='center'
-        extra={<><Button className="notbtn me-1" icon={<Avatar size="22" src={user.avtar}/>} openType="chooseAvatar" onChooseAvatar={onChooseAvatar}></Button><Right size="12" /></>}
+        extra={<><Button className="notbtn" icon={<Avatar size="22" src={user.avtar}/>} openType="chooseAvatar" onChooseAvatar={onChooseAvatar}></Button><Right className="ms-1" size="12" /></>}
         />
         <Cell
         className='nutui-cell--clickable'
         title='姓名'
         align='center'
-        extra={<><span className="me-1">{user.name}</span><Right size="12" /></>}
+        extra={<><span>{user.name}</span><Right className="ms-1" size="12" /></>}
         />
         <Cell
         className='nutui-cell--clickable'
         title='手机'
         align='center'
-        extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{user.phone}</Button><Right size="12" /></>}
+        extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{user.phone}</Button><Right className="ms-1" size="12" /></>}
         />
         <Cell
         className='nutui-cell--clickable'
         title='律所'
         align='center'
-        extra={<><span className="me-1">{user.firm.name}</span><Right size="12" /></>}
+        extra={<><span>{user.firm.name}</span><Right className="ms-1" size="12" /></>}
         />
       </Cell.Group>
     <View className="p-1 fixed">
