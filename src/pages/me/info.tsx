@@ -47,6 +47,29 @@ function Index() {
     Taro.navigateTo({ url: "/pages/me/name" })
   }
 
+  const logout = () => {
+    console.log('out')
+    Taro.showModal({
+      title: '提示',
+      content: '确定要退出当前账号？',
+      success: function (res) {
+        if (res.confirm) {
+          Taro.removeStorage({
+            key: Env.storageKey,
+            success: res => {
+              console.log('storeage removed: ' + Env.storageKey);
+            },
+            fail: res => {
+              console.log('storeage removed failed');
+            }
+          })
+          Taro.redirectTo({ url: '/pages/me/login'})
+        } else if (res.cancel) {
+        }
+      }
+    })
+  }
+
   return (
     <View className="">
       <Cell.Group>
@@ -77,7 +100,7 @@ function Index() {
         />
       </Cell.Group>
     <View className="p-1 fixed">
-      <Button className="btn" block>退出登录</Button>
+      <Button className="btn" block onClick={logout}>退出登录</Button>
     </View>
     </View>
   )
