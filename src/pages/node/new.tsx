@@ -16,6 +16,9 @@ import { Right } from '@nutui/icons-react-taro'
 function Index() {
   const [visible, setVisible] = useState(false)
   const [type, setType] = useState('')
+  const [others, setOthers] = useState([])
+  const [othersList, setOthersList] = useState([])
+  const [count, setCount] = useState(1)
   const types = [
     [
       { value: 1, text: '南京市',},
@@ -37,8 +40,27 @@ function Index() {
     console.log(v)
   }
 
+  const more = () => {
+    console.log('add more')
+    setCount(count + 1)
+    let list = []
+    for (let i = 0; i < count; i++) {
+      list.push(
+      <Cell>
+        <Input
+          className="nut-input-text"
+          placeholder="材料名称"
+          type="text"
+        />
+        <Uploader url="https://my-json-server.typicode.com/linrufeng/demo/posts" />
+      </Cell>
+      )
+    }
+    setOthersList(list)
+  }
+
   return (
-    <View className="nutui-react-demo">
+    <View className="">
       <View className="index">
       <Form
         labelPosition="left"
@@ -84,6 +106,10 @@ function Index() {
           <Uploader
             url="https://my-json-server.typicode.com/linrufeng/demo/posts" />
         </Form.Item>
+
+        {othersList}
+
+        <Button block type="default" onClick={more}> 添加材料 </Button>
 
         <Cell>正文</Cell>
         <Form.Item
