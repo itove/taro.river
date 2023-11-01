@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import { Button, Cell } from "@nutui/nutui-react-taro"
+import { Button, Cell, Avatar, Row, Col } from "@nutui/nutui-react-taro"
 import { Right } from '@nutui/icons-react-taro'
 import './index.scss'
 import Taro from '@tarojs/taro'
@@ -38,41 +38,43 @@ function Index() {
         console.log(res)
         setUser(res.data)
       })
-
-      // for (let i in attrs) {
-      // const extra= <><span>{attrs[i]}</span><Right /></>
-      // l.push(
-      //     <Cell
-      //     className='nutui-cell--clickable'
-      //     title={i}
-      //     align='center'
-      //     extra={extra}
-      //     onClick={goto}
-      //     />
-      //     )
-      // }
-      // console.log(l)
-      // setList(l)
     })
 
   }, [])
 
   return (
-    <View className="nutui-react-demo">
+    <View className="">
+      <Row className="p-1">
+        <Col span="">
+          <Avatar
+            size="large"
+            src="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png"
+          />
+        </Col>
+        <Col span="" className="ps-1">
+            <div className="flex-content flex-content-light">{user.username}</div>
+            <div className="flex-content flex-content-light">{user.name}</div>
+        </Col> 
+      </Row>
       <Cell.Group>
         <Cell
         className='nutui-cell--clickable'
-        title='姓名'
+        title='个人信息'
         align='center'
-        extra={user.name}
+        extra={<Right />}
         onClick={goto}
         />
         <Cell
         className='nutui-cell--clickable'
-        title='电话'
+        title='我的收藏'
         align='center'
-        extra={user.phone}
-        onClick={goto}
+        extra={<Right />}
+        />
+        <Cell
+        className='nutui-cell--clickable'
+        title='设置'
+        align='center'
+        extra={<Right />}
         />
       </Cell.Group>
     </View>
