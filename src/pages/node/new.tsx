@@ -1,4 +1,4 @@
-import  React, { useState  } from "react";
+import  React, { useState, useEffect } from "react";
 import { View } from '@tarojs/components'
 import './index.scss'
 import {
@@ -12,22 +12,40 @@ import {
   TextArea
 } from '@nutui/nutui-react-taro'
 import { Right } from '@nutui/icons-react-taro'
+import Taro from '@tarojs/taro'
+import { Env } from '../../env'
 
 function Index() {
   const [visible, setVisible] = useState(false)
   const [type, setType] = useState('')
+  const [types, setTypes] = useState([])
   const [others, setOthers] = useState([])
   const [othersList, setOthersList] = useState([])
   const [count, setCount] = useState(1)
   const [desc1, setDesc1] = useState('')
-  const types = [
+  const types0 = [
     [
-      { value: 1, text: '南京市',},
-      { value: 2, text: '无锡市',},
-      { value: 3, text: '海北藏族自治区',},
-      { value: 4, text: '北京市',}
+      { name: 'dasf', id: 1, value: 1, text: '南京市',},
+      { name: 'dasf', id: 1, value: 2, text: '无锡市',},
+      { name: 'dasf', id: 1, value: 3, text: '海北藏族自治区',},
+      { name: 'dasf', id: 1, value: 4, text: '北京市',}
     ]
   ]
+
+  useEffect(() => {
+    Taro.request({
+      url: Env.apiUrl + 'types'
+    })
+    .then(res => {
+      // console.log(res)
+      let t = res.data
+      for (const i of t) {
+        i.text = i.name
+        i.value = i.id
+      }
+      setTypes(t)
+    })
+  }, [])
 
   const changePicker = (list: any[], option: any, columnIndex: number) => {
     // console.log(columnIndex, option)
@@ -44,7 +62,7 @@ function Index() {
     if (type.value === undefined) {
       // show error msg and return
       setDesc1('请选择类型')
-      console.log('select type')
+      // console.log('select type')
       return
     }
     //
@@ -56,7 +74,7 @@ function Index() {
   }
 
   const more = () => {
-    console.log('add more')
+    // console.log('add more')
     setCount(count + 1)
     let list = []
     for (let i = 0; i < count; i++) {
@@ -90,7 +108,7 @@ function Index() {
           </>
         }
       >
-        <Cell title="请选择类型" description={desc1} className="red-desc" extra={type.text} onClick={() => setVisible(!visible)} />
+        <Cell title="请选择类型" description={desc1} className="red-desc" extra={type.name} onClick={() => setVisible(!visible)} />
         <Picker
           visible={visible}
           options={types}
