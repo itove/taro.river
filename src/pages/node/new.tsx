@@ -23,14 +23,6 @@ function Index() {
   const [othersList, setOthersList] = useState([])
   const [count, setCount] = useState(1)
   const [desc1, setDesc1] = useState('')
-  const types0 = [
-    [
-      { name: 'dasf', id: 1, value: 1, text: '南京市',},
-      { name: 'dasf', id: 1, value: 2, text: '无锡市',},
-      { name: 'dasf', id: 1, value: 3, text: '海北藏族自治区',},
-      { name: 'dasf', id: 1, value: 4, text: '北京市',}
-    ]
-  ]
 
   useEffect(() => {
     Taro.request({
