@@ -39,6 +39,14 @@ function Index() {
 
   }, [])
 
+  const onChooseAvatar = (e) => {
+    console.log(e)
+  }
+
+  const onGetphonenumber = (e) => {
+    console.log(e)
+  }
+
   return (
     <View className="">
       <Cell.Group>
@@ -46,8 +54,7 @@ function Index() {
         className='nutui-cell--clickable'
         title='头像'
         align='center'
-        extra={<><Avatar size="22" className="me-1" src={user.avtar}/><Right size="12" /></>}
-        onClick={goto}
+        extra={<><Button className="notbtn me-1" icon={<Avatar size="22" src={user.avtar}/>} openType="chooseAvatar" onChooseAvatar={onChooseAvatar}></Button><Right size="12" /></>}
         />
         <Cell
         className='nutui-cell--clickable'
@@ -59,7 +66,7 @@ function Index() {
         className='nutui-cell--clickable'
         title='手机'
         align='center'
-        extra={<><span className="me-1">{user.phone}</span><Right size="12" /></>}
+        extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{user.phone}</Button><Right size="12" /></>}
         />
         <Cell
         className='nutui-cell--clickable'
