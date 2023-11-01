@@ -13,7 +13,7 @@ function goto() {
 
 function Index() {
   // const [list, setList] = useState([])
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({firm: {name: ''}})
   let l = []
   let uid: int
 
@@ -30,10 +30,13 @@ function Index() {
       })
       .then(res => {
         console.log(res)
-        setUser(res.data)
+        let u = res.data
+        if (u.firm === undefined) {
+          u.firm = {name: ''}
+        }
+        setUser(u)
       })
     })
-
   }, [])
 
   return (
@@ -47,6 +50,7 @@ function Index() {
         </Col>
         <Col span="" className="ps-1">
             <div className="ellipsis flex-content flex-content-light">{user.name}</div>
+            <div className="ellipsis flex-content flex-content-light">{user.firm.name}</div>
         </Col> 
       </Row>
       <Cell.Group>
