@@ -42,7 +42,7 @@ function wxlogin() {
 function Index() {
   return (
     <View className="nutui-react-demo">
-      <View className="index">
+      <View className="index pt-12">
         <Button type="success" className="btn" onClick={wxlogin}>
           微信登录
         </Button>
