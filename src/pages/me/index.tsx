@@ -6,12 +6,6 @@ import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
-// const attrs = {
-//   name: 'jess',
-//   phone: '1329191',
-//   phone1: 'df29191'
-// }
-
 function goto() {
   const link = '/pages/me/info'
   Taro.navigateTo({ url: link })

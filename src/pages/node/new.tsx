@@ -90,7 +90,6 @@ function Index() {
       <Form
         divider
         labelPosition="left"
-        onSubmit={formSubmit}
         onFinish={(values) => formSubmit(values)}
         footer={
           <>

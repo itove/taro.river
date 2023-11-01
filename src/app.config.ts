@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/node/new',
     'pages/me/index',
     'pages/me/info',
+    'pages/me/name',
     'pages/me/login',
     'pages/me/setting',
     'pages/index/index'

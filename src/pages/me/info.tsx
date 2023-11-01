@@ -6,11 +6,6 @@ import './index.scss'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
-function goto() {
-  const link = '/pages/node/index'
-  Taro.navigateTo({ url: link })
-}
-
 function Index() {
   const [user, setUser] = useState({firm: {name: ''}})
   let l = []
@@ -47,6 +42,11 @@ function Index() {
     console.log(e)
   }
 
+  const editName = () => {
+    console.log('go')
+    Taro.navigateTo({ url: "/pages/me/name" })
+  }
+
   return (
     <View className="">
       <Cell.Group>
@@ -61,6 +61,7 @@ function Index() {
         title='姓名'
         align='center'
         extra={<><span>{user.name}</span><Right className="ms-1" size="12" /></>}
+        onClick={editName}
         />
         <Cell
         className='nutui-cell--clickable'
