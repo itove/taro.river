@@ -76,8 +76,17 @@ function Index() {
             type="text"
           />
         </Form.Item>
+       <Form.Item
+          label="申请书图片"
+          name="files"
+					required="true"
+        >
+          <Uploader
+            url="https://my-json-server.typicode.com/linrufeng/demo/posts" />
+        </Form.Item>
+
+        <Cell>正文</Cell>
         <Form.Item
-          label="正文"
           name="body"
 					autoSize="true"
           rules={[
@@ -86,13 +95,6 @@ function Index() {
           ]}
         >
           <TextArea placeholder="请输入正文" maxLength={1000} />
-        </Form.Item>
-       <Form.Item
-          label="申请书图片"
-          name="files"
-        >
-          <Uploader
-            url="https://my-json-server.typicode.com/linrufeng/demo/posts" />
         </Form.Item>
       </Form>
       </View>
