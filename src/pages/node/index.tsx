@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import { Button, Cell, Avatar, Row, Col, Empty } from "@nutui/nutui-react-taro"
+import { Button, Cell, Avatar, Row, Col, Empty, Skeleton } from "@nutui/nutui-react-taro"
 import { Right } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import './index.scss'
@@ -12,7 +12,7 @@ function goto() {
 }
 
 function Index() {
-  const [nodeList, setNodeList] = useState([])
+  const [nodeList, setNodeList] = useState()
   let uid: int
 
   const goto = (id) => {
@@ -20,6 +20,7 @@ function Index() {
   }
 
   useEffect(() => {
+  console.log(nodeList)
     Taro.getStorage({
       key: Env.storageKey
     })
@@ -54,15 +55,18 @@ function Index() {
   }, [])
 
   return (
-    <View className="">
+    <View className="p-1">
       <View className="index">
-        { nodeList.length > 0
-        &&
+        { nodeList && nodeList.length > 0 &&
         <Cell.Group divider class="w-100">
           {nodeList}
         </Cell.Group>
-        ||
+        }
+        { nodeList && nodeList.length === 0 &&
         <Empty status="empty" description="无内容" imageSize={250} />
+        }
+        { nodeList === undefined &&
+        <Skeleton animated title rows={22} />
         }
       </View>
     </View>
