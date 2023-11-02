@@ -48,15 +48,19 @@ function Index() {
     setDesc1('')
   }
 
+  const onFinishFailed = v => {
+    if (type.value === undefined) {
+      setDesc1('请选择类型')
+    }
+  }
+
   const formSubmit = v => {
     let data = v
-    // if type not selected
     if (type.value === undefined) {
-      // show error msg and return
       setDesc1('请选择类型')
-      // console.log('select type')
       return
     }
+
     //
     // if app image not uploaded
     // show error msg and return
@@ -107,6 +111,7 @@ function Index() {
         divider
         labelPosition="left"
         onFinish={(values) => formSubmit(values)}
+        onFinishFailed={(values) => onFinishFailed(values)}
         footer={
           <>
             <Button formType="submit" block type="primary">
