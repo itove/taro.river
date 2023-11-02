@@ -206,14 +206,27 @@ function Index() {
             { max: 25, message: '标题不能超过25个字' },
             { required: true, message: '请输入标题' },
           ]}
-         >
-           <Input
-             className="nut-input-text"
-             placeholder="请输入标题"
-             align="right"
-             type="text"
-           />
-         </Form.Item>
+        >
+          <Input
+            className="nut-input-text"
+            placeholder="请输入标题"
+            align="right"
+            type="text"
+          />
+        </Form.Item>
+
+        <Cell>正文</Cell>
+        <Form.Item
+          name="body"
+					autoSize="true"
+          rules={[
+            { min: 10, message: '正文不能少于10个字' },
+            { required: true, message: '请输入正文' },
+          ]}
+        >
+          <TextArea placeholder="请输入正文" maxLength={1000} />
+        </Form.Item>
+
          <Form.Item
             label="申请书图片"
             name="files"
@@ -237,17 +250,6 @@ function Index() {
           <Button size="small" block type="default" onClick={more} icon={<Plus size="16" />}> 添加材料 </Button>
         </View>
 
-        <Cell>正文</Cell>
-        <Form.Item
-          name="body"
-					autoSize="true"
-          rules={[
-            { min: 10, message: '正文不能少于10个字' },
-            { required: true, message: '请输入正文' },
-          ]}
-        >
-          <TextArea placeholder="请输入正文" maxLength={1000} />
-        </Form.Item>
       </Form>
       </View>
     </View>

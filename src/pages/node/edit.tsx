@@ -218,6 +218,19 @@ function Index() {
              type="text"
            />
          </Form.Item>
+
+        <Cell>正文</Cell>
+        <Form.Item
+          name="body"
+					autoSize="true"
+          rules={[
+            { min: 10, message: '正文不能少于10个字' },
+            { required: true, message: '请输入正文' },
+          ]}
+        >
+          <TextArea placeholder="请输入正文" maxLength={1000} />
+        </Form.Item>
+
          <Form.Item
             label="申请书图片"
             name="files"
@@ -240,18 +253,6 @@ function Index() {
         <View class="btn-wrapper">
           <Button size="small" block type="default" onClick={more} icon={<Plus size="16" />}> 添加材料 </Button>
         </View>
-
-        <Cell>正文</Cell>
-        <Form.Item
-          name="body"
-					autoSize="true"
-          rules={[
-            { min: 10, message: '正文不能少于10个字' },
-            { required: true, message: '请输入正文' },
-          ]}
-        >
-          <TextArea placeholder="请输入正文" maxLength={1000} />
-        </Form.Item>
       </Form>
       </View>
     </View>
