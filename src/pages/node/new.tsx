@@ -108,18 +108,32 @@ function Index() {
   
   const onFailure = (res) => {
     console.log(res)
-    let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
-    setPics([...pics, pic])
   }
 
   const onSuccess = (res) => {
     console.log(res)
+    let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
+    setPics([...pics, pic])
+  }
+
+  const onSuccessOther = (res) => {
+    console.log(res)
+    let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
   }
 
   const onDelete = (file, files) => {
     console.log(file)
     console.log(files)
     setPics(files)
+  }
+
+  const onDeleteOther = (file, files) => {
+    console.log(file)
+    console.log(files)
+  }
+
+  const onBlurOther = (v) => {
+    console.log(v)
   }
 
   const more = () => {
@@ -132,6 +146,7 @@ function Index() {
           className="nut-input-text"
           placeholder="材料名称"
           type="text"
+          onBlur={onBlurOther}
         />
         <Uploader
           name="upload"
@@ -139,9 +154,9 @@ function Index() {
           maxCount="1" multiple="true"
           data={{type: 3}}
           url={Env.uploadUrl}
-          onSuccess={onSuccess}
+          onSuccess={onSuccessOther}
           onFailure={onFailure}
-          onDelete={onDelete}
+          onDelete={onDeleteOther}
         />
       </Cell>
       )
