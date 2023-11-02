@@ -197,7 +197,7 @@ function Index() {
          />
 
         <Form.Item
-          // required
+          required={false}
           className="title1"
           label="标题"
           name="title"
