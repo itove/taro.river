@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import { Button, Cell, Avatar, Row, Col } from "@nutui/nutui-react-taro"
+import { Button, Cell, Avatar, Row, Col, Empty } from "@nutui/nutui-react-taro"
 import { Right } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import './index.scss'
@@ -56,9 +56,14 @@ function Index() {
   return (
     <View className="">
       <View className="index">
+        {nodeList
+        &&
         <Cell.Group divider class="w-100">
           {nodeList}
         </Cell.Group>
+        ||
+        <Empty status="empty" description="无内容" imageSize={250} />
+        }
       </View>
     </View>
   )
