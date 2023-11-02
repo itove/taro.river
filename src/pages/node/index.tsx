@@ -15,6 +15,10 @@ function Index() {
   const [nodeList, setNodeList] = useState([])
   let uid: int
 
+  const goto = (id) => {
+    Taro.navigateTo({url: '/pages/node/show?id=' + id})
+  }
+
   useEffect(() => {
     Taro.getStorage({
       key: Env.storageKey
@@ -36,6 +40,7 @@ function Index() {
           description={fmtDate(n.createdAt)}
           align='center'
           extra={<><span>{n.type.name}</span> <Right className="ms-1" size="12" /></>}
+          onClick={() => goto(n.id)}
           />
         )
         console.log(l)
