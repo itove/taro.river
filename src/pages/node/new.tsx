@@ -135,7 +135,7 @@ function Index() {
         />
         <Uploader
           name="upload"
-          // xhrState="201"
+          xhrState={201}
           maxCount="1" multiple="true"
           data={{type: 3}}
           url={Env.uploadUrl}
@@ -206,7 +206,7 @@ function Index() {
          >
           <Uploader
             name="upload"
-            // xhrState="201"
+            xhrState={201}
             // maxCount="9" multiple="true"
             data={{type: 2}}
             url={Env.uploadUrl}

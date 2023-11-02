@@ -43,6 +43,12 @@ page{
   // --nutui-form-item-tip-font-size: .5rem;
   // --nutui-form-item-tip-text-align: left;
 }
+.nut-uploader__preview-img{
+  // --nutui-uploader-picture-icon-tip-font-size: 0;
+  .tips {
+    display: none;
+  }
+}
 .red-desc{
   // --nutui-cell-description-color: var(--nutui-form-item-error-message-color);
   --nutui-cell-description-color: red;
