@@ -1,6 +1,9 @@
 .pt-12{
   padding-top: 12rem;
 }
+.p-16{
+  padding: 1.6rem !important;
+}
 .me-1{
   margin-right: .5rem;
 }
@@ -52,4 +55,7 @@ page{
 }
 .d-block{
   display: block !important;
+}
+form{
+  width: 98%;
 }

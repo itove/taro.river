@@ -15,15 +15,12 @@ function Index() {
   // const [list, setList] = useState([])
   const [user, setUser] = useState({firm: {name: ''}})
   let l = []
-  let uid: int
 
   useEffect(() => {
     Taro.getStorage({
       key: Env.storageKey
     })
     .then(res => {
-      uid = res.data.id
-
       // fetch data
       Taro.request({
         url: Env.apiUrl + 'users/' + res.data.id

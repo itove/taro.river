@@ -19,10 +19,21 @@ function Index() {
   const [visible, setVisible] = useState(false)
   const [type, setType] = useState('')
   const [types, setTypes] = useState([])
+  const [pics, setPics] = useState([])
   const [others, setOthers] = useState([])
   const [othersList, setOthersList] = useState([])
   const [count, setCount] = useState(1)
   const [desc1, setDesc1] = useState('')
+  const [uid, setUid] = useState(0)
+
+  useEffect(() => {
+    Taro.getStorage({
+      key: Env.storageKey
+    })
+    .then(res => {
+      setUid(res.data.id)
+    })
+  }, [])
 
   useEffect(() => {
     Taro.request({
@@ -61,20 +72,54 @@ function Index() {
       return
     }
 
+    data.type = '/api/types/' + type.value
+    data.lawyer = '/api/users/' + uid
+    data.application = pics[0]
+    console.log(data)
+    // return
+
+    Taro.request({
+      method: 'POST',
+      url: Env.apiUrl + 'nodes',
+      data
+    }).then((res) => {
+      if (res.statusCode === 201) {
+        Taro.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000
+        }).then(() => {
+          Taro.reLaunch({ url: '/pages/node/index' })
+        })
+      } else {
+        Taro.showToast({
+          title: '系统错误',
+          icon: 'error',
+          duration: 2000
+        })
+        console.log('server error！' + res.errMsg)
+      }
+    })
+
     //
     // if app image not uploaded
     // show error msg and return
-    
-    data.tid = type.value
-    console.log(data)
   }
   
   const onFailure = (res) => {
     console.log(res)
+    let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
+    setPics([...pics, pic])
   }
 
   const onSuccess = (res) => {
     console.log(res)
+  }
+
+  const onDelete = (file, files) => {
+    console.log(file)
+    console.log(files)
+    setPics(files)
   }
 
   const more = () => {
@@ -97,6 +142,7 @@ function Index() {
           url={Env.uploadUrl}
           onSuccess={onSuccess}
           onFailure={onFailure}
+          onDelete={onDelete}
         />
       </Cell>
       )
@@ -108,6 +154,7 @@ function Index() {
     <View className="">
       <View className="index">
       <Form
+        className="form"
         divider
         labelPosition="left"
         onFinish={(values) => formSubmit(values)}
@@ -150,7 +197,7 @@ function Index() {
          <Form.Item
             label="申请书图片"
             name="files"
-            required="true"
+            // required="true"
          >
           <Uploader
             name="upload"
@@ -160,12 +207,15 @@ function Index() {
             url={Env.uploadUrl}
             onSuccess={onSuccess}
             onFailure={onFailure}
+            onDelete={onDelete}
           />
         </Form.Item>
 
         {othersList}
 
-        <Button block type="default" onClick={more} icon={<Plus size="16" />}> 添加材料 </Button>
+        <View class="btn-wrapper">
+          <Button size="small" block type="default" onClick={more} icon={<Plus size="16" />}> 添加材料 </Button>
+        </View>
 
         <Cell>正文</Cell>
         <Form.Item
