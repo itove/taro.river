@@ -56,7 +56,7 @@ function Index() {
   return (
     <View className="">
       <View className="index">
-        {nodeList
+        { nodeList.length > 0
         &&
         <Cell.Group divider class="w-100">
           {nodeList}
