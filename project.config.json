@@ -2,9 +2,9 @@
   "miniprogramRoot": "./dist",
   "projectname": "taro.subao",
   "description": "",
-  "appid": "wx43948cb13500d4c1",
+  "appid": "touristappid",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": false,
     "compileHotReLoad": false,
