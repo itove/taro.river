@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { View } from '@tarojs/components'
-import { Button, Cell, Avatar, Row, Col, Image } from "@nutui/nutui-react-taro"
+import { View, Image } from '@tarojs/components'
+import { Button, Cell, Avatar, Row, Col } from "@nutui/nutui-react-taro"
 import { Right } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import './index.scss'
@@ -22,7 +22,7 @@ function Index() {
       const l = res.data.others.map(o => 
         <View>
           <View className="h3">{o.name}</View>
-          <Image src={Env.filesUrl + 'others/' + o.image} width="100%" height="unset" />
+          <Image className="w-100" src={Env.filesUrl + 'others/' + o.image} mode="widthFix" preview="true" />
         </View>
       )
       setOthersList(l)
@@ -34,7 +34,7 @@ function Index() {
   }
 
   return (
-    <View className="px-1 article">
+    <View className="px-1 article pb-3">
       <View className="title">{node.title}</View>
       <View className="meta">
         <Row type="flex" justify="space-between">
@@ -47,8 +47,8 @@ function Index() {
         </Row>
       </View>
       <View dangerouslySetInnerHTML={{__html: node.body}} className='body'></View>
-      <View class="h3"> 申请书图片 </View>
-      <Image src={Env.filesUrl + 'node/' + node.application} width="100%" height="unset" />
+      <View className="h3"> 申请书图片 </View>
+      <Image className="w-100" src={Env.filesUrl + 'node/' + node.application} mode="widthFix" preview="true" />
 
       {othersList}
 
