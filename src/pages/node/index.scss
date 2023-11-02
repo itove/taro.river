@@ -31,3 +31,11 @@
 .btn-wrapper{
   padding: 1rem;
 }
+.footer{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  button {
+    width: 40%;
+  }
+}

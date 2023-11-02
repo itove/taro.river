@@ -123,7 +123,6 @@ function Index() {
   }
 
   const more = () => {
-    // console.log('add more')
     setCount(count + 1)
     let list = []
     for (let i = 0; i < count; i++) {
@@ -150,6 +149,13 @@ function Index() {
     setOthersList(list)
   }
 
+  const reset = () => {
+    console.log('reset')
+    setOthersList([])
+    setType('')
+    setCount(1)
+  }
+
   return (
     <View className="">
       <View className="index">
@@ -160,11 +166,10 @@ function Index() {
         onFinish={(values) => formSubmit(values)}
         onFinishFailed={(values) => onFinishFailed(values)}
         footer={
-          <>
-            <Button formType="submit" block type="primary">
-              提交
-            </Button>
-          </>
+          <View className="footer">
+            <Button formType="submit" type="primary"> 提交 </Button>
+            <Button formType="reset" type="default" onClick={reset}> 清空 </Button>
+          </View>
         }
       >
         <Cell title="请选择类型" description={desc1} className="red-desc" extra={type.name} onClick={() => setVisible(!visible)} />
@@ -202,7 +207,7 @@ function Index() {
           <Uploader
             name="upload"
             // xhrState="201"
-            maxCount="1" multiple="true"
+            // maxCount="9" multiple="true"
             data={{type: 2}}
             url={Env.uploadUrl}
             onSuccess={onSuccess}
