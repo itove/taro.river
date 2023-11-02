@@ -46,8 +46,8 @@ function Index() {
           />
         </Col>
         <Col span="" className="ps-1">
-            <div className="ellipsis flex-content flex-content-light">{user.name}</div>
-            <div className="ellipsis flex-content flex-content-light">{user.firm.name}</div>
+            <div className="ellipsis w-10 flex-content flex-content-light">{user.name}</div>
+            <div className="ellipsis w-10 flex-content flex-content-light">{user.firm.name}</div>
         </Col> 
       </Row>
       <Cell.Group>

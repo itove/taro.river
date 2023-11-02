@@ -39,7 +39,7 @@ function Index() {
 
   return (
     <View className="px-1 article pb-3">
-      <View className="title">{node.title}</View>
+      <View className="title ellipsis">{node.title}</View>
       <View className="meta">
         <Row type="flex" justify="space-between">
             <Col span="12">
