@@ -45,7 +45,7 @@ function Index() {
         <Col span="">
           <Avatar
             size="50"
-            src={user.avatar}
+            src={Env.baseUrl + user.avatar}
           />
         </Col>
         <Col span="" className="ps-1">
