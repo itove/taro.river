@@ -197,7 +197,6 @@ function Index() {
          />
 
         <Form.Item
-          required={false}
           className="title1"
           label="标题"
           name="title"
@@ -230,7 +229,6 @@ function Index() {
          <Form.Item
             label="申请书图片"
             name="files"
-            // required="true"
          >
           <Uploader
             name="upload"
