@@ -22,6 +22,7 @@ export const Env = {
   baseUrl: baseUrl,
   apiUrl: baseUrl + 'api/',
   filesUrl: baseUrl + 'files/',
+  uploadUrl: baseUrl + 'api/media_objects',
   storageKey: 'user',
   ver: '0.1.0'
 }

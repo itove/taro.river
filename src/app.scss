@@ -36,10 +36,20 @@
 }
 page{
   --nutui-button-border-radius: .25rem;
+	--nutui-uploader-preview-margin-right: 0;
+  // --nutui-form-item-tip-font-size: .5rem;
+  // --nutui-form-item-tip-text-align: left;
+}
+.red-desc{
+  // --nutui-cell-description-color: var(--nutui-form-item-error-message-color);
+  --nutui-cell-description-color: red;
 }
 .notbtn{
   border: none !important;
   padding: 0 !important;
   display: flex !important;
   align-items: center !important;
+}
+.d-block{
+  display: block !important;
 }

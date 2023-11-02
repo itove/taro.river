@@ -64,6 +64,14 @@ function Index() {
     data.tid = type.value
     console.log(data)
   }
+  
+  const onFailure = (res) => {
+    console.log(res)
+  }
+
+  const onSuccess = (res) => {
+    console.log(res)
+  }
 
   const more = () => {
     // console.log('add more')
@@ -77,7 +85,15 @@ function Index() {
           placeholder="材料名称"
           type="text"
         />
-        <Uploader url="https://my-json-server.typicode.com/linrufeng/demo/posts" />
+        <Uploader
+          name="upload"
+          // xhrState="201"
+          maxCount="1" multiple="true"
+          data={{type: 3}}
+          url={Env.uploadUrl}
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+        />
       </Cell>
       )
     }
@@ -110,28 +126,36 @@ function Index() {
 
         <Form.Item
           // required
+          className="title1"
           label="标题"
           name="title"
-          className="err-on-right"
+          errorMessageAlign="right"
           rules={[
             { max: 25, message: '标题不能超过25个字' },
             { required: true, message: '请输入标题' },
           ]}
-        >
-          <Input
-            className="nut-input-text"
-            placeholder="请输入标题"
-            align="right"
-            type="text"
-          />
-        </Form.Item>
-       <Form.Item
-          label="申请书图片"
-          name="files"
-					required="true"
-        >
+         >
+           <Input
+             className="nut-input-text"
+             placeholder="请输入标题"
+             align="right"
+             type="text"
+           />
+         </Form.Item>
+         <Form.Item
+            label="申请书图片"
+            name="files"
+            required="true"
+         >
           <Uploader
-            url="https://my-json-server.typicode.com/linrufeng/demo/posts" />
+            name="upload"
+            // xhrState="201"
+            maxCount="1" multiple="true"
+            data={{type: 2}}
+            url={Env.uploadUrl}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+          />
         </Form.Item>
 
         {othersList}
