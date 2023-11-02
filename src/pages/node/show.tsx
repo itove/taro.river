@@ -10,10 +10,14 @@ import { fmtDate } from '../../fmtDate'
 function Index() {
   const [node, setNode] = useState({type: ''})
   const [othersList, setOthersList] = useState([])
+  const [id, setId] = useState(0)
 
   useEffect(() => {
+    const instance = Taro.getCurrentInstance();
+    const id = instance.router.params.id
+    setId(id)
     Taro.request({
-      url: Env.apiUrl + 'nodes/' + 1
+      url: Env.apiUrl + 'nodes/' + id
     })
     .then(res => {
       console.log(res)
@@ -29,8 +33,8 @@ function Index() {
     })
   }, [])
 
-  const edit = () => {
-    console.log('go edit')
+  function edit() {
+    Taro.navigateTo({url: '/pages/node/edit?id=' + id})
   }
 
   return (
