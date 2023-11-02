@@ -68,3 +68,13 @@ page{
 form{
   width: 98%;
 }
+.cell{
+  .nut-cell__left{
+    width: 60%;
+  }
+  .nut-cell__title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

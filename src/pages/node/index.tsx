@@ -5,6 +5,7 @@ import { Right } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import './index.scss'
 import { Env } from '../../env'
+import { fmtDate } from '../../fmtDate'
 
 function goto() {
   Taro.navigateTo({url: '/pages/node/new'})
@@ -30,9 +31,9 @@ function Index() {
         console.log(res)
         const l = res.data.map(n => 
           <Cell
-          className='nutui-cell--clickable'
+          className='cell'
           title={n.title}
-          description={n.createdAt}
+          description={fmtDate(n.createdAt)}
           align='center'
           extra={<><span>{n.type.name}</span> <Right className="ms-1" size="12" /></>}
           />
