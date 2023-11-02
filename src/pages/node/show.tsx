@@ -42,11 +42,11 @@ function Index() {
                 <div className="flex-content">{node.type.name}</div>
             </Col>
             <Col span="12">
-                <div className="flex-content">{fmtDate(node.createdAt)}</div>
+                <div className="flex-content text-align-right">{fmtDate(node.createdAt)}</div>
             </Col>
         </Row>
       </View>
-      <View dangerouslySetInnerHTML={{__html: node.body}} className='body mb-1'></View>
+      <View dangerouslySetInnerHTML={{__html: node.body}} className='body'></View>
       <View class="h3"> 申请书图片 </View>
       <Image src={Env.filesUrl + 'node/' + node.application} width="100%" height="unset" />
 
