@@ -12,7 +12,7 @@ switch (envVer) {
     baseUrl = 'https://subao.itove.com/'
     break
   case 'trial':
-    baseUrl = 'https://subao.dev.itove.com/'
+    baseUrl = 'https://subao.itove.com/'
     break
   case 'release':
     baseUrl = 'https://subao.itove.com/';
