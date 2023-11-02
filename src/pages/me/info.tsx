@@ -8,18 +8,16 @@ import { Env } from '../../env'
 
 function Index() {
   const [user, setUser] = useState({firm: {name: ''}})
+  const [avatarUrl, setAvatarUrl] = useState('')
   const [firms, setFirms] = useState([])
   const [firm, setFirm] = useState({})
   const [visible, setVisible] = useState(false)
-  let l = []
-  let uid: int
 
   useEffect(() => {
     Taro.getStorage({
       key: Env.storageKey
     })
     .then(res => {
-      uid = res.data.id
 
       // fetch data
       Taro.request({
@@ -40,6 +38,7 @@ function Index() {
           setFirm(user.firm)
         }
         setUser(user)
+        setAvatarUrl(Env.baseUrl + user.avatar)
       })
     })
   }, [])
@@ -92,7 +91,20 @@ function Index() {
   }
 
   const onChooseAvatar = (e) => {
-    console.log(e)
+    const f = e.detail.avatarUrl
+    console.log(f)
+    Taro.uploadFile({
+      url: Env.apiUrl + 'media_objects',
+      filePath: f,
+      name: 'upload',
+      formData: {
+        'type': 1,
+        'entityId': user.id
+      }
+    })
+    .then(res => {
+      setAvatarUrl(f)
+    })
   }
 
   const onGetphonenumber = (e) => {
@@ -134,7 +146,7 @@ function Index() {
         className='nutui-cell--clickable'
         title='头像'
         align='center'
-        extra={<><Button className="notbtn" icon={<Avatar size="22" src={user.avtar}/>} openType="chooseAvatar" onChooseAvatar={onChooseAvatar}></Button><Right className="ms-1" size="12" /></>}
+        extra={<><Button className="notbtn" icon={<Avatar size="22" src={avatarUrl}/>} openType="chooseAvatar" onChooseAvatar={onChooseAvatar}></Button><Right className="ms-1" size="12" /></>}
         />
         <Cell
         className='nutui-cell--clickable'

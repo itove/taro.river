@@ -8,10 +8,10 @@ switch (envVer) {
   case 'develop':
     // baseUrl = 'https://127.0.0.1:8000/'
     // baseUrl = 'http://localhost:8000/'
-    baseUrl = 'https://subao.dev.itove.com/'
+    baseUrl = 'https://subao.itove.com/'
     break
   case 'trial':
-    baseUrl = 'https://subao.dev.itove.com/'
+    baseUrl = 'https://subao.itove.com/'
     break
   case 'release':
     baseUrl = 'https://subao.itove.com/';
@@ -21,7 +21,7 @@ switch (envVer) {
 export const Env = {
   baseUrl: baseUrl,
   apiUrl: baseUrl + 'api/',
-  imgUrl: baseUrl + 'img/',
+  filesUrl: baseUrl + 'files/',
   storageKey: 'user',
   ver: '0.1.0'
 }
