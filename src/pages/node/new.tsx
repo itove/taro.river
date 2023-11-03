@@ -168,15 +168,18 @@ function Index() {
       <View ref={oRef}>
         <Form.Item
           name={"other-text-" + i}
+          label="材料名称"
+          errorMessageAlign="right"
+          className="tips-block"
           rules={[
             { required: true, message: '请输入材料名称' },
           ]}
         >
           <Input
             className="nut-input-text"
-            placeholder="材料名称"
+            placeholder="请输入材料名称"
             type="text"
-            // onBlur={onBlurOther}
+            align="right"
           />
         </Form.Item>
 
@@ -245,7 +248,7 @@ function Index() {
          />
 
         <Form.Item
-          className="title1"
+          className="tips-block"
           label="标题"
           name="title"
           errorMessageAlign="right"
