@@ -1,4 +1,4 @@
-import  React, { useState, useEffect } from "react";
+import  React, { useState, useEffect, useRef } from "react";
 import { View } from '@tarojs/components'
 import './index.scss'
 import {
@@ -23,9 +23,19 @@ function Index() {
   const [pics, setPics] = useState([])
   const [others, setOthers] = useState([])
   const [othersList, setOthersList] = useState([])
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(0)
   const [desc1, setDesc1] = useState('')
   const [uid, setUid] = useState(0)
+  const [form] = Form.useForm()
+  const rmRef = useRef(null)
+  const oRef = useRef(null)
+  // const countRef = useRef(count)
+  // const countRef = useRef(null)
+  const countRef = useRef()
+
+  useEffect(() => {
+    countRef.current = count
+  }, [count])
 
   useEffect(() => {
     Taro.getStorage({
@@ -64,6 +74,13 @@ function Index() {
     if (type.value === undefined) {
       setDesc1('请选择类型')
     }
+    // console.log(form)
+    // console.log(form.getFieldValue('files'))
+    // console.log(form.getFieldValue('other-text-0'))
+    // console.log(form.getFieldValue('other-pic-0'))
+    // console.log(form.getFieldValue('other-text-1'))
+    // console.log(form.getFieldValue('other-pic-1'))
+    console.log(count)
   }
 
   const formSubmit = v => {
@@ -77,7 +94,8 @@ function Index() {
     data.lawyer = '/api/users/' + uid
     data.application = pics[0]
     console.log(data)
-    // return
+    // console.log(form)
+    return
 
     Taro.request({
       method: 'POST',
@@ -138,57 +156,78 @@ function Index() {
   }
 
   const deleteThis = (v) => {
-    console.log(v)
+    genList(count)
   }
 
-  const more = () => {
-    setCount(count + 1)
-    let list = []
-    for (let i = 0; i < count; i++) {
-      list.push(
-      <Swipe
-      onActionClick={deleteThis}
-      rightAction={
-        <Button type="primary" shape="square">
-          删除
-        </Button>
-      }
-      >
-      <Cell>
-        <Input
-          className="nut-input-text"
-          placeholder="材料名称"
-          type="text"
-          onBlur={onBlurOther}
-        />
-        <Uploader
-          name="upload"
-          xhrState={201}
-          maxCount="1" multiple="true"
-          data={{type: 3}}
-          url={Env.uploadUrl}
-          onSuccess={onSuccessOther}
-          onFailure={onFailure}
-          onDelete={onDeleteOther}
-        />
-      </Cell>
-      </Swipe>
+
+  function rmOne () {
+    genList(countRef.current - 1)
+  }
+
+  const genList = (c) => {
+    console.log(c)
+    // let l = othersList 
+    let l = []
+    for (let i = 0; i < c; i++) {
+      l.push(
+      <View ref={oRef}>
+        <Form.Item
+          name={"other-text-" + i}
+          rules={[
+            { required: true, message: '请输入材料名称' },
+          ]}
+        >
+          <Input
+            className="nut-input-text"
+            placeholder="材料名称"
+            type="text"
+            // onBlur={onBlurOther}
+          />
+        </Form.Item>
+
+        <Swipe
+          onActionClick={() => rmOne()}
+          // disabled={true}
+          rightAction={
+           <Button type="primary" shape="square">
+             删除
+           </Button>
+          }
+        >
+        <Form.Item
+          name={"other-pic-" + i}
+        >
+          <Uploader
+            name="upload"
+            xhrState={201}
+            maxCount="1" multiple="true"
+            data={{type: 3}}
+            url={Env.uploadUrl}
+            onSuccess={onSuccessOther}
+            onFailure={onFailure}
+            onDelete={onDeleteOther}
+          />
+        </Form.Item>
+        </Swipe>
+      </View>
       )
     }
-    setOthersList(list)
+    setOthersList(l)
+    setCount(c)
   }
 
   const reset = () => {
     console.log('reset')
     setOthersList([])
     setType('')
-    setCount(1)
+    setCount(0)
   }
 
   return (
     <View className="">
       <View className="index">
       <Form
+        form={form}
         className="form"
         divider
         labelPosition="left"
@@ -259,7 +298,7 @@ function Index() {
         {othersList}
 
         <View class="btn-wrapper">
-          <Button size="small" block type="default" onClick={more} icon={<Plus size="16" />}> 添加材料 </Button>
+          <Button size="small" block type="default" onClick={() => {genList(count + 1)}} icon={<Plus size="16" />}> 添加材料 </Button>
         </View>
 
       </Form>
