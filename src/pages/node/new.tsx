@@ -2,6 +2,7 @@ import  React, { useState, useEffect } from "react";
 import { View } from '@tarojs/components'
 import './index.scss'
 import {
+  Swipe,
   Cell,
   Form,
   Picker,
@@ -136,11 +137,23 @@ function Index() {
     console.log(v)
   }
 
+  const deleteThis = (v) => {
+    console.log(v)
+  }
+
   const more = () => {
     setCount(count + 1)
     let list = []
     for (let i = 0; i < count; i++) {
       list.push(
+      <Swipe
+      onActionClick={deleteThis}
+      rightAction={
+        <Button type="primary" shape="square">
+          删除
+        </Button>
+      }
+      >
       <Cell>
         <Input
           className="nut-input-text"
@@ -159,6 +172,7 @@ function Index() {
           onDelete={onDeleteOther}
         />
       </Cell>
+      </Swipe>
       )
     }
     setOthersList(list)
