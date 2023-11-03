@@ -155,20 +155,15 @@ function Index() {
     console.log(v)
   }
 
-  const deleteThis = (v) => {
-    genList(count)
-  }
-
-
   function rmOne () {
     genList(countRef.current - 1)
   }
 
   const genList = (c) => {
-    console.log(c)
-    // let l = othersList 
+    let swipeDisabled = true
     let l = []
     for (let i = 0; i < c; i++) {
+      if (i === c-1) { swipeDisabled = false }
       l.push(
       <View ref={oRef}>
         <Form.Item
@@ -187,7 +182,7 @@ function Index() {
 
         <Swipe
           onActionClick={() => rmOne()}
-          // disabled={true}
+          disabled={swipeDisabled}
           rightAction={
            <Button type="primary" shape="square">
              删除
