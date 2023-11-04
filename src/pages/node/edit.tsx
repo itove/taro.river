@@ -1,4 +1,4 @@
-import  React, { useState, useEffect } from "react";
+import  React, { useState, useEffect, useRef } from "react";
 import { View } from '@tarojs/components'
 import './index.scss'
 import {
@@ -16,26 +16,40 @@ import Taro from '@tarojs/taro'
 import { Env } from '../../env'
 
 function Index() {
+  const [nid, setNid] = useState(0)
   const [visible, setVisible] = useState(false)
   const [type, setType] = useState('')
   const [types, setTypes] = useState([])
-  const [pics, setPics] = useState([])
-  const [others, setOthers] = useState([])
   const [othersList, setOthersList] = useState([])
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(0)
   const [desc1, setDesc1] = useState('')
   const [uid, setUid] = useState(0)
-  const [id, setId] = useState(0)
+  const [form] = Form.useForm()
+  const [node, setNode] = useState({type: ''})
+  const countRef = useRef()
+
+  useEffect(() => {
+    countRef.current = count
+  }, [count])
 
   useEffect(() => {
     const instance = Taro.getCurrentInstance();
-    const id = instance.router.params.id
-    setId(id)
+    const nid = instance.router.params.id
+    setNid(nid)
+
     Taro.getStorage({
       key: Env.storageKey
     })
     .then(res => {
       setUid(res.data.id)
+    })
+
+    Taro.request({
+      url: Env.apiUrl + 'nodes/' + nid
+    })
+    .then(res => {
+      console.log(res.data)
+      setNode(res.data)
     })
   }, [])
 
@@ -63,28 +77,59 @@ function Index() {
     setDesc1('')
   }
 
+  const assembleData = (v) => {
+    let data = {
+      title: v.title,
+      body: v.body,
+      type: '/api/types/' + type.value,
+      lawyer: '/api/users/' + uid
+    }
+
+    if (form.getFieldValue('files') !== undefined && form.getFieldValue('files')[0] !== undefined) {
+      data.application = JSON.parse(form.getFieldValue('files')[0].responseText.data).url.replace(/.*\//, '') 
+    }
+
+    let o = []
+    for (let i = 0; i < count; i++) {
+      let nameText = 'other-text-' + i
+      let namePic = 'other-pic-' + i
+      let image
+      if (form.getFieldValue(namePic) === undefined) {
+        image = ''
+      } else {
+        image = JSON.parse(form.getFieldValue(namePic)[0].responseText.data).url.replace(/.*\//, '') 
+      }
+      o.push({
+        name: form.getFieldValue(nameText),
+        image 
+      })
+    }
+    if (o.length > 0) {
+      data.others = o
+    }
+    console.log(data)
+    return data
+  }
+
   const onFinishFailed = v => {
     if (type.value === undefined) {
       setDesc1('请选择类型')
     }
+
+    assembleData(v)
   }
 
   const formSubmit = v => {
-    let data = v
     if (type.value === undefined) {
       setDesc1('请选择类型')
       return
     }
-
-    data.type = '/api/types/' + type.value
-    data.lawyer = '/api/users/' + uid
-    data.application = pics[0]
-    console.log(data)
+    let data = assembleData(v)
     // return
 
     Taro.request({
-      method: 'POST',
-      url: Env.apiUrl + 'nodes',
+      method: 'PUT',
+      url: Env.apiUrl + 'nodes/' + nid,
       data
     }).then((res) => {
       if (res.statusCode === 201) {
@@ -104,10 +149,6 @@ function Index() {
         console.log('server error！' + res.errMsg)
       }
     })
-
-    //
-    // if app image not uploaded
-    // show error msg and return
   }
   
   const onFailure = (res) => {
@@ -116,63 +157,68 @@ function Index() {
 
   const onSuccess = (res) => {
     console.log(res)
-    let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
-    setPics([...pics, pic])
   }
 
   const onSuccessOther = (res) => {
     console.log(res)
-    let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
   }
 
-  const onDelete = (file, files) => {
-    console.log(file)
-    console.log(files)
-    setPics(files)
+  const rmOne = () => {
+    genList(countRef.current - 1)
   }
 
-  const onDeleteOther = (file, files) => {
-    console.log(file)
-    console.log(files)
-  }
+  const genList = () => {
+    let swipeDisabled = true
+    let l = []
+    for (let i = 0; i < c; i++) {
+      if (i === c-1) { swipeDisabled = false }
+      l.push(
+      <>
+        <Form.Item
+          name={"other-text-" + i}
+          label="材料名称"
+          errorMessageAlign="right"
+          className="tips-block"
+          rules={[
+            { required: true, message: '请输入材料名称' },
+          ]}
+        >
+          <Input
+            className="nut-input-text"
+            placeholder="请输入材料名称"
+            type="text"
+            align="right"
+          />
+        </Form.Item>
 
-  const onBlurOther = (v) => {
-    console.log(v)
-  }
-
-  const more = () => {
-    setCount(count + 1)
-    let list = []
-    for (let i = 0; i < count; i++) {
-      list.push(
-      <Cell>
-        <Input
-          className="nut-input-text"
-          placeholder="材料名称"
-          type="text"
-          onBlur={onBlurOther}
-        />
-        <Uploader
-          name="upload"
-          xhrState={201}
-          maxCount="1" multiple="true"
-          data={{type: 3}}
-          url={Env.uploadUrl}
-          onSuccess={onSuccessOther}
-          onFailure={onFailure}
-          onDelete={onDeleteOther}
-        />
-      </Cell>
+        <Swipe
+          onActionClick={() => rmOne()}
+          disabled={swipeDisabled}
+          rightAction={
+           <Button type="primary" shape="square">
+             删除
+           </Button>
+          }
+        >
+        <Form.Item
+          name={"other-pic-" + i}
+        >
+          <Uploader
+            name="upload"
+            xhrState={201}
+            maxCount="1" multiple="true"
+            data={{type: 3}}
+            url={Env.uploadUrl}
+            onSuccess={onSuccessOther}
+            onFailure={onFailure}
+          />
+        </Form.Item>
+        </Swipe>
+      </>
       )
     }
-    setOthersList(list)
-  }
-
-  const reset = () => {
-    console.log('reset')
-    setOthersList([])
-    setType('')
-    setCount(1)
+    setOthersList(l)
+    setCount(c)
   }
 
   return (
@@ -185,10 +231,7 @@ function Index() {
         onFinish={(values) => formSubmit(values)}
         onFinishFailed={(values) => onFinishFailed(values)}
         footer={
-          <View className="footer">
-            <Button formType="submit" type="primary"> 提交 </Button>
-            <Button formType="reset" type="default" onClick={reset}> 清空 </Button>
-          </View>
+            <Button formType="submit" type="primary" block> 提交 </Button>
         }
       >
         <Cell title="请选择类型" description={desc1} className="red-desc" extra={type.name} onClick={() => setVisible(!visible)} />
@@ -242,14 +285,13 @@ function Index() {
             url={Env.uploadUrl}
             onSuccess={onSuccess}
             onFailure={onFailure}
-            onDelete={onDelete}
           />
         </Form.Item>
 
         {othersList}
 
         <View class="btn-wrapper">
-          <Button size="small" block type="default" onClick={more} icon={<Plus size="16" />}> 添加材料 </Button>
+          <Button size="small" block type="default" onClick={() => {genList(count + 1)}} icon={<Plus size="16" />}> 添加材料 </Button>
         </View>
       </Form>
       </View>
