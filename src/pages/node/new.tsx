@@ -27,10 +27,6 @@ function Index() {
   const [desc1, setDesc1] = useState('')
   const [uid, setUid] = useState(0)
   const [form] = Form.useForm()
-  const rmRef = useRef(null)
-  const oRef = useRef(null)
-  // const countRef = useRef(count)
-  // const countRef = useRef(null)
   const countRef = useRef()
 
   useEffect(() => {
@@ -75,7 +71,7 @@ function Index() {
       setDesc1('请选择类型')
     }
     // console.log(form)
-    // console.log(form.getFieldValue('files'))
+    console.log(form.getFieldValue('files'))
     // console.log(form.getFieldValue('other-text-0'))
     // console.log(form.getFieldValue('other-pic-0'))
     // console.log(form.getFieldValue('other-text-1'))
@@ -119,10 +115,6 @@ function Index() {
         console.log('server error！' + res.errMsg)
       }
     })
-
-    //
-    // if app image not uploaded
-    // show error msg and return
   }
   
   const onFailure = (res) => {
@@ -131,28 +123,13 @@ function Index() {
 
   const onSuccess = (res) => {
     console.log(res)
-    let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
-    setPics([...pics, pic])
+    // let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
+    // setPics([...pics, pic])
   }
 
   const onSuccessOther = (res) => {
     console.log(res)
-    let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
-  }
-
-  const onDelete = (file, files) => {
-    console.log(file)
-    console.log(files)
-    setPics(files)
-  }
-
-  const onDeleteOther = (file, files) => {
-    console.log(file)
-    console.log(files)
-  }
-
-  const onBlurOther = (v) => {
-    console.log(v)
+    // let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
   }
 
   function rmOne () {
@@ -165,7 +142,7 @@ function Index() {
     for (let i = 0; i < c; i++) {
       if (i === c-1) { swipeDisabled = false }
       l.push(
-      <View ref={oRef}>
+      <>
         <Form.Item
           name={"other-text-" + i}
           label="材料名称"
@@ -203,11 +180,10 @@ function Index() {
             url={Env.uploadUrl}
             onSuccess={onSuccessOther}
             onFailure={onFailure}
-            onDelete={onDeleteOther}
           />
         </Form.Item>
         </Swipe>
-      </View>
+      </>
       )
     }
     setOthersList(l)
@@ -289,7 +265,6 @@ function Index() {
             url={Env.uploadUrl}
             onSuccess={onSuccess}
             onFailure={onFailure}
-            onDelete={onDelete}
           />
         </Form.Item>
 
