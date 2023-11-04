@@ -45,7 +45,8 @@ function Index() {
     })
     .then(res => {
       console.log(res)
-      const l = res.data.map(n => 
+      const l = res.data.map((n, i) => 
+      // <li key={i}>
         <Cell
         className='cell'
         title={n.title}
@@ -54,6 +55,7 @@ function Index() {
         extra={<><span>{n.type.name}</span> <Right className="ms-1" size="12" /></>}
         onClick={() => goto(n.id)}
         />
+        // </li>
       )
       console.log(l)
       setNodeList(l)
@@ -61,6 +63,7 @@ function Index() {
   }
 
   const loadMore = (done: () => void) => {
+    console.log('load morm')
     setTimeout(() => {
       const curLen = nodeList.length
       for (let i = curLen; i < curLen + 10; i++) {
@@ -76,6 +79,7 @@ function Index() {
   }
 
   const refresh = (done: () => void) => {
+    console.log('refresh')
     getNodes(user.id)
     setPage(1)
     setTimeout(() => {
@@ -87,12 +91,16 @@ function Index() {
       done()
     }, 1000)
   }
+  const onScroll = (done: () => void) => {
+    console.log('scrolling')
+  }
 
   return (
     <View className="p-1">
-      <View className="index">
+      <View className="">
         { nodeList && nodeList.length > 0 &&
-
+        // <ul id="nodelist">
+        <Cell.Group divider>
          <InfiniteLoading
             pullingText={
               <span style={{ fontSize: '10px' }}>松开刷新</span>
@@ -100,19 +108,17 @@ function Index() {
             loadingText="加载中···"
             loadMoreText="没有啦～"
             pullRefresh
-            target="scrollDemo"
+            target="nodelist"
             hasMore={hasMore}
             onLoadMore={loadMore}
             onRefresh={refresh}
-            // threshold={1000}
+            threshold={200}
+            onScroll={onScroll}
           >
-
-        <Cell.Group divider class="w-100">
           {nodeList}
-        </Cell.Group>
-
         </InfiniteLoading>
-
+        </Cell.Group>
+        // </ul>
         }
         { nodeList && nodeList.length === 0 &&
         <Empty status="empty" description="暂无案件" imageSize={250} />
