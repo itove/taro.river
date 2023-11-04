@@ -20,8 +20,6 @@ function Index() {
   const [visible, setVisible] = useState(false)
   const [type, setType] = useState('')
   const [types, setTypes] = useState([])
-  const [pics, setPics] = useState([])
-  const [others, setOthers] = useState([])
   const [othersList, setOthersList] = useState([])
   const [count, setCount] = useState(0)
   const [desc1, setDesc1] = useState('')
@@ -66,32 +64,56 @@ function Index() {
     setDesc1('')
   }
 
+  const assembleData = (v) => {
+    let data = {
+      title: v.title,
+      body: v.body,
+      type: '/api/types/' + type.value,
+      lawyer: '/api/users/' + uid
+    }
+
+    if (form.getFieldValue('files') !== undefined && form.getFieldValue('files')[0] !== undefined) {
+      data.application = JSON.parse(form.getFieldValue('files')[0].responseText.data).url.replace(/.*\//, '') 
+    }
+
+    let o = []
+    for (let i = 0; i < count; i++) {
+      let nameText = 'other-text-' + i
+      let namePic = 'other-pic-' + i
+      let image
+      if (form.getFieldValue(namePic) === undefined) {
+        image = ''
+      } else {
+        image = JSON.parse(form.getFieldValue(namePic)[0].responseText.data).url.replace(/.*\//, '') 
+      }
+      o.push({
+        name: form.getFieldValue(nameText),
+        image 
+        //  node: "/api/nodes/" // for PUT
+      })
+    }
+    if (o.length > 0) {
+      data.others = o
+    }
+    console.log(data)
+    return data
+  }
+
   const onFinishFailed = v => {
     if (type.value === undefined) {
       setDesc1('请选择类型')
     }
-    // console.log(form)
-    console.log(form.getFieldValue('files'))
-    // console.log(form.getFieldValue('other-text-0'))
-    // console.log(form.getFieldValue('other-pic-0'))
-    // console.log(form.getFieldValue('other-text-1'))
-    // console.log(form.getFieldValue('other-pic-1'))
-    console.log(count)
+    
+    assembleData(v)
   }
 
   const formSubmit = v => {
-    let data = v
     if (type.value === undefined) {
       setDesc1('请选择类型')
       return
     }
-
-    data.type = '/api/types/' + type.value
-    data.lawyer = '/api/users/' + uid
-    data.application = pics[0]
-    console.log(data)
-    // console.log(form)
-    return
+    let data = assembleData(v)
+    // return
 
     Taro.request({
       method: 'POST',
@@ -123,13 +145,10 @@ function Index() {
 
   const onSuccess = (res) => {
     console.log(res)
-    // let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
-    // setPics([...pics, pic])
   }
 
   const onSuccessOther = (res) => {
     console.log(res)
-    // let pic = JSON.parse(res.responseText.data).url.replace(/.*\//, '')
   }
 
   function rmOne () {
