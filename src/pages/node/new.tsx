@@ -89,7 +89,6 @@ function Index() {
       o.push({
         name: form.getFieldValue(nameText),
         image 
-        //  node: "/api/nodes/" // for PUT
       })
     }
     if (o.length > 0) {
@@ -151,7 +150,7 @@ function Index() {
     console.log(res)
   }
 
-  function rmOne () {
+  const rmOne = () => {
     genList(countRef.current - 1)
   }
 
