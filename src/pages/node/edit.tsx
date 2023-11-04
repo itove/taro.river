@@ -137,6 +137,8 @@ function Index() {
     }
     if (o.length > 0) {
       data.others = o
+    } else {
+      data.others = []
     }
     console.log(data)
     return data
