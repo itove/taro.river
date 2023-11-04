@@ -2,6 +2,7 @@ import  React, { useState, useEffect, useRef } from "react";
 import { View } from '@tarojs/components'
 import './index.scss'
 import {
+  Swipe,
   Cell,
   Form,
   Picker,
@@ -18,7 +19,7 @@ import { Env } from '../../env'
 function Index() {
   const [nid, setNid] = useState(0)
   const [visible, setVisible] = useState(false)
-  const [type, setType] = useState('')
+  const [type, setType] = useState([])
   const [types, setTypes] = useState([])
   const [othersList, setOthersList] = useState([])
   const [count, setCount] = useState(0)
@@ -33,23 +34,45 @@ function Index() {
   }, [count])
 
   useEffect(() => {
-    const instance = Taro.getCurrentInstance();
-    const nid = instance.router.params.id
-    setNid(nid)
-
     Taro.getStorage({
       key: Env.storageKey
     })
     .then(res => {
       setUid(res.data.id)
     })
+  }, [])
 
+  useEffect(() => {
+    const instance = Taro.getCurrentInstance();
+    const nid = instance.router.params.id
+    setNid(nid)
     Taro.request({
       url: Env.apiUrl + 'nodes/' + nid
     })
     .then(res => {
-      console.log(res.data)
-      setNode(res.data)
+      const node = res.data
+      console.log(node)
+      setNode(node)
+      genList(node.others.length)
+      for (let i = 0; i < node.others.length; i++) {
+        let o = []
+        o["other-text-" + i] = node.others[i].name
+        o["other-pic-" + i] = [{
+          url: Env.filesUrl + 'others/' + node.others[i].image,
+          status: 'success',
+          type: 'image',
+        }]
+        form.setFieldsValue(o)
+      }
+      form.setFieldsValue({
+        title: node.title,
+        body: node.body,
+        files: [{
+          url: Env.filesUrl + 'node/' + node.application,
+          status: 'success',
+          type: 'image',
+        }],
+      })
     })
   }, [])
 
@@ -73,7 +96,8 @@ function Index() {
   }
 
   const confirmPicker = (options: PickerOption[], values: (string | number)[]) => {
-    setType(options[0])
+    const t = options[0]
+    setType(t)
     setDesc1('')
   }
 
@@ -81,11 +105,14 @@ function Index() {
     let data = {
       title: v.title,
       body: v.body,
-      type: '/api/types/' + type.value,
-      lawyer: '/api/users/' + uid
+      // type: '/api/types/' + type.value,
+      // lawyer: '/api/users/' + uid
     }
 
-    if (form.getFieldValue('files') !== undefined && form.getFieldValue('files')[0] !== undefined) {
+    if (form.getFieldValue('files') !== undefined 
+        && form.getFieldValue('files')[0] !== undefined
+        && form.getFieldValue('files')[0].responseText !== undefined
+        ) {
       data.application = JSON.parse(form.getFieldValue('files')[0].responseText.data).url.replace(/.*\//, '') 
     }
 
@@ -97,7 +124,11 @@ function Index() {
       if (form.getFieldValue(namePic) === undefined) {
         image = ''
       } else {
-        image = JSON.parse(form.getFieldValue(namePic)[0].responseText.data).url.replace(/.*\//, '') 
+        if (form.getFieldValue(namePic)[0].responseText !== undefined ) {
+          image = JSON.parse(form.getFieldValue(namePic)[0].responseText.data).url.replace(/.*\//, '') 
+        } else {
+          image = node.others[i].image
+        }
       }
       o.push({
         name: form.getFieldValue(nameText),
@@ -120,19 +151,22 @@ function Index() {
   }
 
   const formSubmit = v => {
-    if (type.value === undefined) {
-      setDesc1('请选择类型')
-      return
-    }
+    // if (type.value === undefined) {
+    //   setDesc1('请选择类型')
+    //   return
+    // }
     let data = assembleData(v)
     // return
 
     Taro.request({
-      method: 'PUT',
+      method: 'PATCH',
       url: Env.apiUrl + 'nodes/' + nid,
+      header: {
+        'content-type': 'application/merge-patch+json'
+      },
       data
     }).then((res) => {
-      if (res.statusCode === 201) {
+      if (res.statusCode === 200) {
         Taro.showToast({
           title: '提交成功',
           icon: 'success',
@@ -167,7 +201,7 @@ function Index() {
     genList(countRef.current - 1)
   }
 
-  const genList = () => {
+  const genList = (c) => {
     let swipeDisabled = true
     let l = []
     for (let i = 0; i < c; i++) {
@@ -225,6 +259,7 @@ function Index() {
     <View className="">
       <View className="index">
       <Form
+        form={form}
         className="form"
         divider
         labelPosition="left"
@@ -234,20 +269,26 @@ function Index() {
             <Button formType="submit" type="primary" block> 提交 </Button>
         }
       >
-        <Cell title="请选择类型" description={desc1} className="red-desc" extra={type.name} onClick={() => setVisible(!visible)} />
-        <Picker
-          visible={visible}
-          options={types}
-          onConfirm={(list, values) => confirmPicker(list, values)}
-          onClose={() => setVisible(false)}
-          onChange={changePicker}
-         />
 
         <Form.Item
-          className="title1"
+          label="类型"
+          initialValue={node.type.name}
+         >
+           <Input
+             disabled={true}
+             className="nut-input-text"
+             align="right"
+             placeholder="案件类型"
+             type="text"
+           />
+         </Form.Item>
+
+        <Form.Item
+          className="tips-block"
           label="标题"
           name="title"
           errorMessageAlign="right"
+          initialValue={node.title}
           rules={[
             { max: 25, message: '标题不能超过25个字' },
             { required: true, message: '请输入标题' },
@@ -264,6 +305,7 @@ function Index() {
         <Cell>正文</Cell>
         <Form.Item
           name="body"
+          initialValue={node.body}
 					autoSize="true"
           rules={[
             { min: 10, message: '正文不能少于10个字' },
