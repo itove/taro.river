@@ -14,6 +14,7 @@ function goto() {
 function Index() {
   // const [list, setList] = useState([])
   const [user, setUser] = useState({firm: {name: ''}})
+  const [avatarUrl, setAvatarUrl] = useState('')
   let l = []
 
   useEffect(() => {
@@ -32,6 +33,9 @@ function Index() {
           u.firm = {name: ''}
         }
         setUser(u)
+        if (u.avatar !== undefined) {
+          setAvatarUrl(Env.baseUrl + user.avatar)
+        }
       })
     })
   }, [])
@@ -42,7 +46,7 @@ function Index() {
         <Col span="">
           <Avatar
             size="50"
-            src={Env.baseUrl + user.avatar}
+            src={avatarUrl}
           />
         </Col>
         <Col span="" className="ps-1">

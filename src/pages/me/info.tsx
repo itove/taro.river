@@ -8,6 +8,7 @@ import { Env } from '../../env'
 
 function Index() {
   const [user, setUser] = useState({firm: {name: ''}})
+  const [phone, setPhone] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
   const [firms, setFirms] = useState([])
   const [firm, setFirm] = useState({})
@@ -27,10 +28,12 @@ function Index() {
         console.log(res)
         let user = res.data
         if (user.phone === undefined) {
-          user.phone = '填写手机号'
+          setPhone('填写手机号')
+        } else {
+          setPhone(user.phone)
         }
         if (user.name === undefined) {
-          user.phone = '填写姓名'
+          user.name = '填写姓名'
         }
         if (user.firm === undefined) {
           setFirm({name: '选择律所'})
@@ -38,7 +41,9 @@ function Index() {
           setFirm(user.firm)
         }
         setUser(user)
-        setAvatarUrl(Env.baseUrl + user.avatar)
+        if (user.avatar !== undefined) {
+          setAvatarUrl(Env.baseUrl + user.avatar)
+        }
       })
     })
   }, [])
@@ -108,7 +113,49 @@ function Index() {
   }
 
   const onGetphonenumber = (e) => {
-    console.log(e)
+    const d = e.detail
+    if (d.code !== undefined) {
+      Taro.request({
+        method: 'POST',
+        url: Env.apiUrl + 'wxgetphone',
+        data: {code: d.code}
+      }).then((res) => {
+        if (res.statusCode === 200) {
+          console.log(res)
+          setPhone(res.data.phone_info.purePhoneNumber)
+          Taro.request({
+            method: 'PATCH',
+            data: { phone: res.data.phone_info.purePhoneNumber },
+            url: Env.apiUrl + 'users/' + user.id,
+            header: {
+              'content-type': 'application/merge-patch+json'
+            }
+          }).then((res) =>{
+            if (res.statusCode === 200) {
+              Taro.showToast({
+                title: '修改成功',
+                icon: 'success',
+                duration: 2000,
+                success: () => {
+                  setTimeout(
+                    () => {
+                      Taro.reLaunch({url: '/pages/me/index'})
+                    }, 500
+                  )
+                }
+              })
+            }
+          })
+        } else {
+          Taro.showToast({
+            title: '系统错误',
+            icon: 'error',
+            duration: 2000
+          })
+        }
+        // Taro.hideLoading()
+      })
+    }
   }
 
   const editName = () => {
@@ -159,7 +206,7 @@ function Index() {
         className='nutui-cell--clickable'
         title='手机'
         align='center'
-        extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{user.phone}</Button><Right className="ms-1" size="12" /></>}
+        extra={<><Button className="notbtn" openType="getPhoneNumber" onGetphonenumber={onGetphonenumber}>{phone}</Button><Right className="ms-1" size="12" /></>}
         />
         <Cell
         className='nutui-cell--clickable'
