@@ -38,7 +38,6 @@ function Index() {
   }, [])
 
   const getNodes = (uid, page = 1) => {
-  console.log(page)
     // fetch my nodes
     Taro.request({
       url: Env.apiUrl + 'nodes?lawyer=' + uid + '&page=' + page

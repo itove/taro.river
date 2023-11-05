@@ -211,7 +211,7 @@ function Index() {
   const reset = () => {
     console.log('reset')
     setOthersList([])
-    setType('')
+    // setType({})
     setCount(0)
   }
 
