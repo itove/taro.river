@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import { Button } from "@nutui/nutui-react-taro"
+import { Divider, ActionSheet, Button } from "@nutui/nutui-react-taro"
 import Taro from '@tarojs/taro'
 import './index.scss'
 import { Env } from '../../env'
@@ -8,6 +8,7 @@ import { Env } from '../../env'
 
 function Index() {
   const [disabled, setDisabled] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
   const wxlogin = () => {
     setDisabled(true)
@@ -51,10 +52,22 @@ function Index() {
 
   return (
     <View className="nutui-react-demo">
-      <View className="index pt-12">
-        <Button type="success" className="btn" disabled={disabled} onClick={wxlogin}>
-          微信登录
-        </Button>
+      <View className="pt-12">
+          <View className="text-center mb-1">您需要登录才能管理自己的案件</View>
+          <Button type="success" className="btn m-auto" disabled={disabled} onClick={() => setIsVisible(!isVisible)}>
+            微信登录
+          </Button>
+          <ActionSheet
+            description="点击登录将授权获取微信昵称及头像"
+            visible={isVisible}
+            cancelText="取消"
+            onSelect={() => setIsVisible(false)}
+            onCancel={() => setIsVisible(false)}
+          >
+          <Button type="success" className="btn m-auto" disabled={disabled} onClick={wxlogin}>
+            登录
+          </Button>
+        </ActionSheet>
       </View>
     </View>
   )
