@@ -21,6 +21,9 @@ function Index() {
     Taro.navigateTo({url: '/pages/node/show?id=' + id})
   }
 
+  const onShareAppMessage = (res) => {}
+  const onShareTimeline = (res) => {}
+
   useEffect(() => {
   console.log(nodeList)
     Taro.getStorage({
