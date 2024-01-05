@@ -38,6 +38,10 @@ function Index() {
         }
       })
     })
+    .catch(err => {
+      console.log(err)
+      Taro.redirectTo({url: '/pages/me/login'})
+    })
   }, [])
 
   return (

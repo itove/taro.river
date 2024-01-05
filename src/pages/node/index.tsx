@@ -36,7 +36,8 @@ function Index() {
     })
     .catch(err => {
       console.log(err)
-      Taro.redirectTo({url: '/pages/me/login'})
+      setNodeList([])
+      // Taro.redirectTo({url: '/pages/me/login'})
     })
   }, [])
 

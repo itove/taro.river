@@ -38,6 +38,10 @@ function Index() {
     .then(res => {
       setUid(res.data.id)
     })
+    .catch(err => {
+      console.log(err)
+      Taro.redirectTo({url: '/pages/me/login'})
+    })
   }, [])
 
   useEffect(() => {
