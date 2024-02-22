@@ -124,7 +124,7 @@ function Index() {
         // </ul>
         }
         { nodeList && nodeList.length === 0 &&
-        <Empty status="empty" description="暂无案件" imageSize={250} />
+        <Empty status="empty" description="暂无内容" imageSize={250} />
         }
         { nodeList === undefined &&
         <Skeleton animated title rows={22} />

@@ -9,13 +9,13 @@ switch (envVer) {
     // baseUrl = 'https://127.0.0.1:8000/'
     // baseUrl = 'http://localhost:8000/'
     // baseUrl = 'https://192.168.122.1:8000/'
-    baseUrl = 'https://subao.dev.itove.com/'
+    baseUrl = 'https://river.dev.itove.com/'
     break
   case 'trial':
-    baseUrl = 'https://subao.dev.itove.com/'
+    baseUrl = 'https://river.dev.itove.com/'
     break
   case 'release':
-    baseUrl = 'https://subao.itove.com/';
+    baseUrl = 'https://river.itove.com/';
     break
 }
 

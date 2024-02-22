@@ -1,5 +1,5 @@
 export default definePageConfig({
-  navigationBarTitleText: '我的案件',
+  navigationBarTitleText: '模式列表',
   enableShareAppMessage: true,
   enableShareTimeline: true
 })
