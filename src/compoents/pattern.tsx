@@ -17,7 +17,6 @@ import Taro from '@tarojs/taro'
 import { Env } from '../env'
 
 function Pattern() {
-  const [tabIndex, setTabIndex] = useState(0)
   const [form] = Form.useForm()
   const [isNew, setIsNew] = useState(true)
   const [disabled, setDisabled] = useState(false)

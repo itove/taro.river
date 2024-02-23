@@ -133,6 +133,16 @@ form{
   text-align: center;
 }
 .form{
-  --nutui-form-item-body-input-text-align: right;
-  --nutui-form-item-tip-text-align: right;
+  .type{
+    text-align: center;
+  }
+  .label{
+    color: #888888;
+    font-size: 14px;
+    padding-left: 14px;
+    padding-top: 14px;
+  }
+}
+Form{
+    --nutui-form-item-label-width: 110px;
 }
