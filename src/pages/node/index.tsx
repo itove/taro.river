@@ -18,7 +18,7 @@ function Index() {
   const [user, setUser] = useState([])
 
   const goto = (id) => {
-    Taro.navigateTo({url: '/pages/pattern/edit?id=' + id})
+    Taro.navigateTo({url: '/pages/pattern/edit?pid=' + id})
   }
 
   const onShareAppMessage = (res) => {}

@@ -19,12 +19,36 @@ import { Env } from '../env'
 function Pattern() {
   const [tabIndex, setTabIndex] = useState(0)
   const [form] = Form.useForm()
+  const [isNew, setIsNew] = useState(true)
+  const [disabled, setDisabled] = useState(false)
   const [pid, setPid] = useState(0)
+  const [pattern, setPattern] = useState({})
 
   useEffect(() => {
     const instance = Taro.getCurrentInstance();
-    const pid = instance.router.params.id
+    const pid = instance.router.params.pid
     setPid(pid)
+    if (pid !== 0) {
+      setIsNew(false)
+      setDisabled(true)
+      Taro.request({
+        url: Env.apiUrl + 'patterns/' + pid
+      })
+      .then(res => {
+        const pattern = res.data
+        setPattern(pattern)
+        console.log(pattern)
+        form.setFieldsValue({
+          name: pattern.name,
+          SN: pattern.SN,
+          files: [{
+            url: Env.imagesUrl + pattern.image,
+            status: 'success',
+            type: 'image',
+          }],
+        })
+      })
+    }
   }, [])
 
   const onFailure = (res) => {
@@ -39,7 +63,30 @@ function Pattern() {
   }
 
   const formSubmit = data => {
-    data.image = JSON.parse(data.upload[0].responseText.data).url.replace(/.*\//, '') 
+    if (data.files !== undefined
+        && data.files[0] !== undefined
+        && data.files[0].responseText !== undefined
+       ) {
+      data.image = JSON.parse(data.files[0].responseText.data).url.replace(/.*\//, '') 
+    }
+    // data.latitude = Number(data.latitude)
+    // data.longitude = Number(data.longitude)
+    // data.area = Number(data.area)
+    // data.yuQiDanChan = Number(data.yuQiDanChan)
+    // data.moShiDanJia = Number(data.moShiDanJia)
+    // data.moShiZongJia = Number(data.moShiZongJia)
+    // data.zhongShiDanChan = Number(data.zhongShiDanChan)
+    // data.guanGaiDingE = Number(data.guanGaiDingE)
+    // data.yanJianXiaJiang = Number(data.yanJianXiaJiang)
+    // data.diLiTiSheng = Number(data.diLiTiSheng)
+    // data.shuiXiaoTiSheng = Number(data.shuiXiaoTiSheng)
+    // data.yanZhengZhuanTi = Number(data.yanZhengZhuanTi)
+    // data.quanYanLiang = Number(data.quanYanLiang)
+    // data.youJiZhiHanLiang = Number(data.youJiZhiHanLiang)
+    // data.EC = Number(data.EC)
+    // data.PH = Number(data.PH)
+    // data.touRu = Number(data.touRu)
+    // data.chanChu = Number(data.chanChu)
     console.log(data)
     Taro.request({
       method: 'PATCH',
@@ -80,10 +127,9 @@ function Pattern() {
       }
     >
       <Form.Item
-        required
         label="模式名称"
         name="name"
-        initialValue="fuck name"
+        initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
           { required: true, message: '请输入模式名称' },
@@ -93,13 +139,14 @@ function Pattern() {
           className="nut-input-text"
           placeholder=""
           type="text"
+          disabled={disabled}
         />
       </Form.Item>
 
       <Form.Item
-        required
         label="模式编号"
         name="SN"
+        initialValue={pattern.SN}
         rules={[
           { max: 10, message: '不能超过10字符' },
           { required: true, message: '请输入模式编号' },
@@ -109,6 +156,7 @@ function Pattern() {
           className="nut-input-text"
           placeholder=""
           type="text"
+          disabled={disabled}
         />
       </Form.Item>
 
@@ -116,6 +164,7 @@ function Pattern() {
         required
         label="验证地点"
         name="location"
+        initialValue={pattern.location}
       >
         <Input
           className="nut-input-text"
@@ -127,42 +176,44 @@ function Pattern() {
       <Form.Item
         required
         label="中心北纬"
+        initialValue={pattern.latitude}
         name="latitude"
       >
         <Input
           className="nut-input-text"
-          placeholder=""
-          type="text"
+          type="digit"
         />
       </Form.Item>
 
       <Form.Item
         required
         label="中心东经"
+        initialValue={pattern.longitude}
         name="longitude"
       >
         <Input
           className="nut-input-text"
-          placeholder=""
-          type="text"
+          type="digit"
         />
       </Form.Item>
 
       <Form.Item
         required
         label="面积(亩)"
+        initialValue={pattern.area}
         name="area"
       >
         <Input
           className="nut-input-text"
           placeholder=""
-          type="text"
+          type="number"
         />
       </Form.Item>
 
       <Form.Item
         required
         label="土壤质地"
+        initialValue={pattern.tuRangZhiDi}
         name="tuRangZhiDi"
       >
         <Input
@@ -175,6 +226,7 @@ function Pattern() {
       <Form.Item
         required
         label="盐碱程度"
+        initialValue={pattern.yanHuaJianHua}
         name="yanJianChengDu"
       >
         <Input
@@ -187,6 +239,7 @@ function Pattern() {
       <Form.Item
         required
         label="地力等级"
+        initialValue={pattern.diLiDengJi}
         name="diLiDengJi"
       >
         <Input
@@ -199,6 +252,7 @@ function Pattern() {
       <Form.Item
         required
         label="盐碱成因"
+        initialValue={pattern.yanJianChengYin}
         name="yanJianChengYin"
       >
         <Input
@@ -211,6 +265,7 @@ function Pattern() {
       <Form.Item
         required
         label="主要障碍"
+        initialValue={pattern.zhuYaoZhangAi}
         name="zhuYaoZhangAi"
       >
         <Input
@@ -223,6 +278,7 @@ function Pattern() {
       <Form.Item
         required
         label="种植作物"
+        initialValue={pattern.zhongZhiZuoWu}
         name="zhongZhiZuoWu"
       >
         <Input
@@ -235,6 +291,7 @@ function Pattern() {
       <Form.Item
         required
         label="灌溉协同"
+        initialValue={pattern.guanGaiXieTong}
         name="guanGaiXieTong"
       >
         <Input
@@ -247,6 +304,7 @@ function Pattern() {
       <Form.Item
         required
         label="消障培肥"
+        initialValue={pattern.xiaoZhangPeiFei}
         name="xiaoZhangPeiFei"
       >
         <Input
@@ -259,6 +317,7 @@ function Pattern() {
       <Form.Item
         required
         label="种子农艺"
+        initialValue={pattern.zhongZiNongYi}
         name="zhongZiNongYi"
       >
         <Input
@@ -271,6 +330,7 @@ function Pattern() {
       <Form.Item
         required
         label="跟踪监测"
+        initialValue={pattern.genZongJianCe}
         name="genZongJianCe"
       >
         <Input
@@ -283,6 +343,7 @@ function Pattern() {
       <Form.Item
         required
         label="模式单价"
+        initialValue={pattern.moShiDanJia}
         name="moShiDanJia"
       >
         <Input
@@ -295,6 +356,7 @@ function Pattern() {
       <Form.Item
         required
         label="模式总价"
+        initialValue={pattern.moShiZongJia}
         name="moShiZongJia"
       >
         <Input
@@ -307,6 +369,7 @@ function Pattern() {
       <Form.Item
         required
         label="中试单产"
+        initialValue={pattern.zhongShiDanChan}
         name="zhongShiDanChan"
       >
         <Input
@@ -319,6 +382,7 @@ function Pattern() {
       <Form.Item
         required
         label="灌溉定额"
+        initialValue={pattern.guanGaiDingE}
         name="guanGaiDingE"
       >
         <Input
@@ -331,6 +395,7 @@ function Pattern() {
       <Form.Item
         required
         label="盐碱下降"
+        initialValue={pattern.yanJianXiaJiang}
         name="yanJianXiaJiang"
       >
         <Input
@@ -343,6 +408,7 @@ function Pattern() {
       <Form.Item
         required
         label="地力提升"
+        initialValue={pattern.diLiTiSheng}
         name="diLiTiSheng"
       >
         <Input
@@ -355,6 +421,7 @@ function Pattern() {
       <Form.Item
         required
         label="单产提升"
+        initialValue={pattern.danChanTiSheng}
         name="danChanTiSheng"
       >
         <Input
@@ -367,6 +434,7 @@ function Pattern() {
       <Form.Item
         required
         label="水效提升"
+        initialValue={pattern.shuiXiaoTiSheng}
         name="shuiXiaoTiSheng"
       >
         <Input
@@ -379,6 +447,7 @@ function Pattern() {
       <Form.Item
         required
         label="验证专题"
+        initialValue={pattern.yanZhengZhuanTi}
         name="yanZhengZhuanTi"
       >
         <Input
@@ -391,6 +460,7 @@ function Pattern() {
       <Form.Item
         required
         label="专题负责人"
+        initialValue={pattern.zhuanTiFuZeRen}
         name="zhuanTiFuZeRen"
       >
         <Input
@@ -403,6 +473,7 @@ function Pattern() {
       <Form.Item
         required
         label="实施负责人"
+        initialValue={pattern.shiShiFuZeRen}
         name="shiShiFuZeRen"
       >
         <Input
@@ -415,6 +486,7 @@ function Pattern() {
       <Form.Item
         required
         label="灌排设计"
+        initialValue={pattern.guanPaiSheJi}
         name="guanPaiSheJi"
       >
         <Input
@@ -427,6 +499,7 @@ function Pattern() {
       <Form.Item
         required
         label="培肥设计"
+        initialValue={pattern.peiFeiSheJi}
         name="peiFeiSheJi"
       >
         <Input
@@ -439,6 +512,7 @@ function Pattern() {
       <Form.Item
         required
         label="种子确认"
+        initialValue={pattern.zhongZiQueRen}
         name="zhongZiQueRen"
       >
         <Input
@@ -451,6 +525,7 @@ function Pattern() {
       <Form.Item
         required
         label="农艺设计"
+        initialValue={pattern.nongYiSheJi}
         name="nongYiSheJi"
       >
         <Input
@@ -463,6 +538,7 @@ function Pattern() {
       <Form.Item
         required
         label="监测审核"
+        initialValue={pattern.jianCeShenHe}
         name="jianCeShenHe"
       >
         <Input
@@ -475,6 +551,7 @@ function Pattern() {
       <Form.Item
         required
         label="模式审核"
+        initialValue={pattern.moShiShenHe}
         name="moShiShenHe"
       >
         <Input
@@ -487,6 +564,7 @@ function Pattern() {
       <Form.Item
         required
         label="课题审批"
+        initialValue={pattern.keTiShenPi}
         name="keTiShenPi"
       >
         <Input
@@ -499,6 +577,7 @@ function Pattern() {
       <Form.Item
         required
         label="项目批准"
+        initialValue={pattern.xiangMuPiZhun}
         name="xiangMuPiZhun"
       >
         <Input
@@ -511,6 +590,7 @@ function Pattern() {
       <Form.Item
         required
         label="高程"
+        initialValue={pattern.gaoCheng}
         name="gaoCheng"
       >
         <Input
@@ -523,6 +603,7 @@ function Pattern() {
       <Form.Item
         required
         label="盐化碱化"
+        initialValue={pattern.yanHuaJianHua}
         name="yanHuaJianHua"
       >
         <Input
@@ -535,6 +616,7 @@ function Pattern() {
       <Form.Item
         required
         label="全盐量"
+        initialValue={pattern.quanYanLiang}
         name="quanYanLiang"
       >
         <Input
@@ -547,6 +629,7 @@ function Pattern() {
       <Form.Item
         required
         label="有机质含量"
+        initialValue={pattern.youJiZhiHanLiang}
         name="youJiZhiHanLiang"
       >
         <Input
@@ -559,6 +642,7 @@ function Pattern() {
       <Form.Item
         required
         label="EC值"
+        initialValue={pattern.EC}
         name="EC"
       >
         <Input
@@ -571,6 +655,7 @@ function Pattern() {
       <Form.Item
         required
         label="PH值"
+        initialValue={pattern.PH}
         name="PH"
       >
         <Input
@@ -583,6 +668,7 @@ function Pattern() {
       <Form.Item
         required
         label="灌溉方式"
+        initialValue={pattern.guanGaiFangShi}
         name="guanGaiFangShi"
       >
         <Input
@@ -595,6 +681,7 @@ function Pattern() {
       <Form.Item
         required
         label="肥料施用"
+        initialValue={pattern.feiLiaoShiYong}
         name="feiLiaoShiYong"
       >
         <Input
@@ -607,6 +694,7 @@ function Pattern() {
       <Form.Item
         required
         label="预期单产"
+        initialValue={pattern.yuQiDanChan}
         name="yuQiDanChan"
       >
         <Input
@@ -619,6 +707,7 @@ function Pattern() {
       <Form.Item
         required
         label="产能提升"
+        initialValue={pattern.chanNengTiSheng}
         name="chanNengTiSheng"
       >
         <Input
@@ -631,6 +720,7 @@ function Pattern() {
       <Form.Item
         required
         label="投入"
+        initialValue={pattern.touRu}
         name="touRu"
       >
         <Input
@@ -643,6 +733,7 @@ function Pattern() {
       <Form.Item
         required
         label="产出"
+        initialValue={pattern.chanChu}
         name="chanChu"
       >
         <Input
@@ -655,6 +746,7 @@ function Pattern() {
       <Form.Item
         required
         label="灌排协同措施"
+        initialValue={pattern.guanPaiXieTongCuoShi}
         name="guanPaiXieTongCuoShi"
       >
         <Input
@@ -667,6 +759,7 @@ function Pattern() {
       <Form.Item
         required
         label="消障培肥要点"
+        initialValue={pattern.xiaoZhangPeiFeiYaoDian}
         name="xiaoZhangPeiFeiYaoDian"
       >
         <Input
@@ -679,6 +772,7 @@ function Pattern() {
       <Form.Item
         required
         label="农艺栽培特点"
+        initialValue={pattern.nongYiZaiPeiTeDian}
         name="nongYiZaiPeiTeDian"
       >
         <Input
@@ -691,6 +785,7 @@ function Pattern() {
       <Form.Item
         required
         label="跟踪监测方案"
+        initialValue={pattern.genZongJianCeFangAn}
         name="genZongJianCeFangAn"
       >
         <Input
@@ -703,6 +798,7 @@ function Pattern() {
       <Form.Item
         required
         label="组织实施协同"
+        initialValue={pattern.zuZhiShiShiXieTong}
         name="zuZhiShiShiXieTong"
       >
         <Input
@@ -715,6 +811,7 @@ function Pattern() {
       <Form.Item
         required
         label="种子品种"
+        initialValue={pattern.zhongZiPinZhong}
         name="zhongZiPinZhong"
       >
         <Input
@@ -726,7 +823,7 @@ function Pattern() {
 
       <Form.Item
          label="田块照片"
-         name="upload"
+         name="files"
       >
        <Uploader
          name="upload"

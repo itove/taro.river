@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '模式编辑'
+  navigationBarTitleText: '编辑模式'
 })

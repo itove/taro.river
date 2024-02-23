@@ -31,13 +31,13 @@ function Edit() {
   return (
     <View className="">
       <Tabs onChange={(v) => {setTabIndex(v)}} activeType="simple">
-        <Tabs.TabPane title="模式概要"> <Pattern /> </Tabs.TabPane>
-        <Tabs.TabPane title="理化本底"> <Soil /> </Tabs.TabPane>
-        <Tabs.TabPane title="灌排协同"> <Irrigation /> </Tabs.TabPane>
-        <Tabs.TabPane title="消障培肥"> <Fertilizer /> </Tabs.TabPane>
-        <Tabs.TabPane title="种子农艺"> <Seed /> </Tabs.TabPane>
-        <Tabs.TabPane title="跟踪监测"> <Tracking /> </Tabs.TabPane>
-        <Tabs.TabPane title="成本效益"> <Cost /> </Tabs.TabPane>
+        <Tabs.TabPane key={0} title="模式概要"> <Pattern /> </Tabs.TabPane>
+        <Tabs.TabPane key={1} title="理化本底"> <Soil /> </Tabs.TabPane>
+        <Tabs.TabPane key={2} title="灌排协同"> <Irrigation /> </Tabs.TabPane>
+        <Tabs.TabPane key={3} title="消障培肥"> <Fertilizer /> </Tabs.TabPane>
+        <Tabs.TabPane key={4} title="种子农艺"> <Seed /> </Tabs.TabPane>
+        <Tabs.TabPane key={5} title="跟踪监测"> <Tracking /> </Tabs.TabPane>
+        <Tabs.TabPane key={6} title="成本效益"> <Cost /> </Tabs.TabPane>
 			</Tabs>
     </View>
   )
