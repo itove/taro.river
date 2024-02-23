@@ -19,7 +19,6 @@ import { Env } from '../env'
 function FertilizerForm() {
   return (
     <>
-      <View className="label">土壤物理</View>
       <Form.Item
         label="日期"
         name="name"

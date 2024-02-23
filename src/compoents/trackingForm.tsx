@@ -16,11 +16,11 @@ import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../env'
 
-function SeedForm() {
+function TrackingForm() {
   return (
     <>
       <Form.Item
-        label="日期"
+        label="方法设备"
         name="name"
         // initialValue={pattern.name}
         rules={[
@@ -33,7 +33,7 @@ function SeedForm() {
         />
       </Form.Item>
       <Form.Item
-        label="农艺技术"
+        label="监测频次"
         name="name"
         // initialValue={pattern.name}
         rules={[
@@ -46,7 +46,7 @@ function SeedForm() {
         />
       </Form.Item>
       <Form.Item
-        label="物理结构改善"
+        label="现地远程"
         name="name"
         // initialValue={pattern.name}
         rules={[
@@ -59,7 +59,7 @@ function SeedForm() {
         />
       </Form.Item>
       <Form.Item
-        label="措施3"
+        label="监测专题"
         name="name"
         // initialValue={pattern.name}
         rules={[
@@ -75,4 +75,4 @@ function SeedForm() {
   )
 }
 
-export default SeedForm
+export default TrackingForm
