@@ -25,23 +25,23 @@ function Index() {
   const onShareTimeline = (res) => {}
 
   useEffect(() => {
-  console.log(nodeList)
+    console.log(nodeList)
+    getNodes()
     Taro.getStorage({
       key: Env.storageKey
     })
     .then(res => {
       console.log('logged in')
       setUser(res.data)
-      getNodes(res.data.id)
     })
     .catch(err => {
       console.log(err)
-      setNodeList([])
+      // setNodeList([])
       // Taro.redirectTo({url: '/pages/me/login'})
     })
   }, [])
 
-  const getNodes = (uid, page = 1) => {
+  const getNodes = (page = 1) => {
     // fetch my nodes
     Taro.request({
       url: Env.apiUrl + 'patterns?page=' + page
@@ -52,10 +52,10 @@ function Index() {
       // <li key={i}>
         <Cell
         className='cell'
-        title={n.title}
-        description={fmtDate(n.createdAt)}
+        title={n.name}
+        description={n.SN}
         align='center'
-        extra={<><span>{n.type.name}</span> <Right className="ms-1" size="12" /></>}
+        extra={<Right className="ms-1" size="12" />}
         onClick={() => goto(n.id)}
         />
         // </li>
@@ -83,7 +83,7 @@ function Index() {
 
   const refresh = (done: () => void) => {
     console.log('refresh')
-    getNodes(user.id)
+    getNodes()
     setPage(1)
     setTimeout(() => {
       Taro.showToast({
