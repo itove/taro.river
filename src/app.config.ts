@@ -23,7 +23,7 @@ export default defineAppConfig({
     list: [
       {
         "pagePath": "pages/node/index",
-        "text": "案件",
+        "text": "模式",
         "iconPath": './icon/home.png',
         "selectedIconPath": './icon/home-fill.png'
       },
