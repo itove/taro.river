@@ -16,13 +16,13 @@ import {
 import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../../env'
-import Pattern from '../../compoents/soil'
+import Pattern from '../../compoents/pattern'
 import Soil from '../../compoents/soil'
-import Irrigation from '../../compoents/soil'
-import Fertilizer from '../../compoents/soil'
-import Seed from '../../compoents/soil'
-import Tracking from '../../compoents/soil'
-import Cost from '../../compoents/soil'
+import Irrigation from '../../compoents/irrigation'
+import Fertilizer from '../../compoents/fertilizer'
+import Seed from '../../compoents/seed'
+import Tracking from '../../compoents/tracking'
+import Cost from '../../compoents/cost'
 
 function Edit() {
   const [tabIndex, setTabIndex] = useState(0)
