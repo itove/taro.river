@@ -19,7 +19,7 @@ import { Env } from '../env'
 import CostForm from './costForm'
 import { ArrowDown } from '@nutui/icons-react-taro'
 
-function Tracking() {
+function Cost() {
   const [form] = Form.useForm()
 
   const formSubmit = data => {
