@@ -1,5 +1,5 @@
 const config = {
-  projectName: 'taro.subao',
+  projectName: 'taro.river',
   date: '2023-10-29',
   designWidth: 375,
   deviceRatio: {
@@ -9,7 +9,7 @@ const config = {
     375: 2 / 1
   },
   sourceRoot: 'src',
-  outputRoot: '../../../../mnt/d/subao',
+  outputRoot: '../../../../mnt/d/river',
   plugins: ['@tarojs/plugin-html'],
   defineConstants: {
   },
