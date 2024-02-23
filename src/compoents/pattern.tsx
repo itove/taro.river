@@ -69,24 +69,24 @@ function Pattern() {
        ) {
       data.image = JSON.parse(data.files[0].responseText.data).url.replace(/.*\//, '') 
     }
-    // data.latitude = Number(data.latitude)
-    // data.longitude = Number(data.longitude)
-    // data.area = Number(data.area)
-    // data.yuQiDanChan = Number(data.yuQiDanChan)
-    // data.moShiDanJia = Number(data.moShiDanJia)
-    // data.moShiZongJia = Number(data.moShiZongJia)
-    // data.zhongShiDanChan = Number(data.zhongShiDanChan)
-    // data.guanGaiDingE = Number(data.guanGaiDingE)
-    // data.yanJianXiaJiang = Number(data.yanJianXiaJiang)
-    // data.diLiTiSheng = Number(data.diLiTiSheng)
-    // data.shuiXiaoTiSheng = Number(data.shuiXiaoTiSheng)
-    // data.yanZhengZhuanTi = Number(data.yanZhengZhuanTi)
-    // data.quanYanLiang = Number(data.quanYanLiang)
-    // data.youJiZhiHanLiang = Number(data.youJiZhiHanLiang)
-    // data.EC = Number(data.EC)
-    // data.PH = Number(data.PH)
-    // data.touRu = Number(data.touRu)
-    // data.chanChu = Number(data.chanChu)
+    if (data.latitude !== undefined) data.latitude = Number(data.latitude)
+    if (data.longitude !== undefined) data.longitude = Number(data.longitude)
+    if (data.area !== undefined) data.area = Number(data.area)
+    if (data.yuQiDanChan !== undefined) data.yuQiDanChan = Number(data.yuQiDanChan)
+    if (data.moShiDanJia !== undefined) data.moShiDanJia = Number(data.moShiDanJia)
+    if (data.moShiZongJia !== undefined) data.moShiZongJia = Number(data.moShiZongJia)
+    if (data.zhongShiDanChan !== undefined) data.zhongShiDanChan = Number(data.zhongShiDanChan)
+    if (data.guanGaiDingE !== undefined) data.guanGaiDingE = Number(data.guanGaiDingE)
+    if (data.yanJianXiaJiang !== undefined) data.yanJianXiaJiang = Number(data.yanJianXiaJiang)
+    if (data.diLiTiSheng !== undefined) data.diLiTiSheng = Number(data.diLiTiSheng)
+    if (data.shuiXiaoTiSheng !== undefined) data.shuiXiaoTiSheng = Number(data.shuiXiaoTiSheng)
+    if (data.yanZhengZhuanTi !== undefined) data.yanZhengZhuanTi = Number(data.yanZhengZhuanTi)
+    if (data.quanYanLiang !== undefined) data.quanYanLiang = Number(data.quanYanLiang)
+    if (data.youJiZhiHanLiang !== undefined) data.youJiZhiHanLiang = Number(data.youJiZhiHanLiang)
+    if (data.EC !== undefined) data.EC = Number(data.EC)
+    if (data.PH !== undefined) data.PH = Number(data.PH)
+    if (data.touRu !== undefined) data.touRu = Number(data.touRu)
+    if (data.chanChu !== undefined) data.chanChu = Number(data.chanChu)
     console.log(data)
     Taro.request({
       method: 'PATCH',
@@ -205,7 +205,6 @@ function Pattern() {
       >
         <Input
           className="nut-input-text"
-          placeholder=""
           type="number"
         />
       </Form.Item>
@@ -226,7 +225,7 @@ function Pattern() {
       <Form.Item
         required
         label="盐碱程度"
-        initialValue={pattern.yanHuaJianHua}
+        initialValue={pattern.yanJianChengDu}
         name="yanJianChengDu"
       >
         <Input
