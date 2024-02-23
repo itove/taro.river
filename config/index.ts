@@ -25,6 +25,7 @@ const config = {
     prebundle: { enable: false }
   },
   mini: {
+    // debugReact: true,
     postcss: {
       pxtransform: {
         enable: true,

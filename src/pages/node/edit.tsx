@@ -10,7 +10,8 @@ import {
   Button,
   InputNumber,
   Input,
-  TextArea
+  TextArea,
+  Tabs
 } from '@nutui/nutui-react-taro'
 import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
@@ -25,6 +26,7 @@ function Index() {
   const [count, setCount] = useState(0)
   const [desc1, setDesc1] = useState('')
   const [uid, setUid] = useState(0)
+  const [tabIndex, setTabIndex] = useState(0)
   const [form] = Form.useForm()
   const [node, setNode] = useState({type: ''})
   const countRef = useRef()
@@ -260,6 +262,12 @@ function Index() {
   return (
     <View className="">
       <View className="index">
+      <Tabs onChange={(v) => {setTabIndex(v)}}>
+        <Tabs.TabPane title="低阶特卖">低阶特卖</Tabs.TabPane>
+        <Tabs.TabPane title="上新日">上新日</Tabs.TabPane>
+        <Tabs.TabPane title="百亿补贴">百亿补贴</Tabs.TabPane>
+        <Tabs.TabPane title="今日聚超值">今日聚超值</Tabs.TabPane>
+        <Tabs.TabPane title="真好真便宜">真好真便宜</Tabs.TabPane>
       <Form
         form={form}
         className="form"
@@ -338,6 +346,7 @@ function Index() {
           <Button size="small" block type="default" onClick={() => {genList(count + 1)}} icon={<Plus size="16" />}> 添加材料 </Button>
         </View>
       </Form>
+			</Tabs>
       </View>
     </View>
   )

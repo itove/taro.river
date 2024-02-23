@@ -1,8 +1,8 @@
 export default defineAppConfig({
   pages: [
     'pages/node/index',
-    'pages/node/show',
-    'pages/node/edit',
+    'pages/pattern/index',
+    'pages/pattern/edit',
     'pages/node/new',
     'pages/me/index',
     'pages/me/info',
