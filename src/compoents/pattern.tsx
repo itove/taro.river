@@ -21,14 +21,14 @@ function Pattern() {
   const [form] = Form.useForm()
   const [isNew, setIsNew] = useState(true)
   const [disabled, setDisabled] = useState(false)
-  const [pid, setPid] = useState(0)
+  const [pid, setPid] = useState(undefined)
   const [pattern, setPattern] = useState({})
 
   useEffect(() => {
     const instance = Taro.getCurrentInstance();
     const pid = instance.router.params.pid
     setPid(pid)
-    if (pid !== 0) {
+    if (pid !== undefined) {
       setIsNew(false)
       setDisabled(true)
       Taro.request({
