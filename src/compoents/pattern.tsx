@@ -128,6 +128,7 @@ function Pattern() {
 
   return (
     <Form
+      className="form"
       form={form}
       divider
       labelPosition="left"
@@ -171,6 +172,7 @@ function Pattern() {
         />
       </Form.Item>
 
+      <View className="label">地理位置</View>
       <Form.Item
         required
         label="验证地点"
@@ -208,6 +210,34 @@ function Pattern() {
         />
       </Form.Item>
 
+      <Form.Item
+        required
+        label="高程"
+        initialValue={pattern.gaoCheng}
+        name="gaoCheng"
+      >
+        <Input
+          className="nut-input-text"
+          placeholder=""
+          type="text"
+        />
+      </Form.Item>
+
+      <Form.Item
+         label="田块照片"
+         name="files"
+      >
+       <Uploader
+         name="upload"
+         xhrState={200}
+         // maxCount="9" multiple="true"
+         url={Env.uploadUrl}
+         onSuccess={onSuccess}
+         onFailure={onFailure}
+       />
+      </Form.Item>
+
+      <View className="label">耕地质量</View>
       <Form.Item
         required
         label="面积(亩)"
@@ -287,6 +317,72 @@ function Pattern() {
 
       <Form.Item
         required
+        label="盐化碱化"
+        initialValue={pattern.yanHuaJianHua}
+        name="yanHuaJianHua"
+      >
+        <Input
+          className="nut-input-text"
+          placeholder=""
+          type="text"
+        />
+      </Form.Item>
+
+      <Form.Item
+        required
+        label="全盐量"
+        initialValue={pattern.quanYanLiang}
+        name="quanYanLiang"
+      >
+        <Input
+          className="nut-input-text"
+          placeholder=""
+          type="text"
+        />
+      </Form.Item>
+
+      <Form.Item
+        required
+        label="有机质含量"
+        initialValue={pattern.youJiZhiHanLiang}
+        name="youJiZhiHanLiang"
+      >
+        <Input
+          className="nut-input-text"
+          placeholder=""
+          type="text"
+        />
+      </Form.Item>
+
+      <Form.Item
+        required
+        label="EC值"
+        initialValue={pattern.EC}
+        name="EC"
+      >
+        <Input
+          className="nut-input-text"
+          placeholder=""
+          type="text"
+        />
+      </Form.Item>
+
+      <Form.Item
+        required
+        label="PH值"
+        initialValue={pattern.PH}
+        name="PH"
+      >
+        <Input
+          className="nut-input-text"
+          placeholder=""
+          type="text"
+        />
+      </Form.Item>
+
+      <View className="label">方案措施</View>
+      <Form.Item
+        required
         label="种植作物"
         initialValue={pattern.zhongZhiZuoWu}
         name="zhongZhiZuoWu"
@@ -350,6 +446,7 @@ function Pattern() {
         />
       </Form.Item>
 
+      <View className="label">成本核算</View>
       <Form.Item
         required
         label="模式单价"
@@ -402,6 +499,7 @@ function Pattern() {
         />
       </Form.Item>
 
+      <View className="label">预期目标</View>
       <Form.Item
         required
         label="盐碱下降"
@@ -454,6 +552,7 @@ function Pattern() {
         />
       </Form.Item>
 
+      <View className="label">实施组织</View>
       <Form.Item
         required
         label="验证专题"
@@ -493,6 +592,7 @@ function Pattern() {
         />
       </Form.Item>
 
+      <View className="label">审核审批</View>
       <Form.Item
         required
         label="灌排设计"
@@ -597,84 +697,7 @@ function Pattern() {
         />
       </Form.Item>
 
-      <Form.Item
-        required
-        label="高程"
-        initialValue={pattern.gaoCheng}
-        name="gaoCheng"
-      >
-        <Input
-          className="nut-input-text"
-          placeholder=""
-          type="text"
-        />
-      </Form.Item>
-
-      <Form.Item
-        required
-        label="盐化碱化"
-        initialValue={pattern.yanHuaJianHua}
-        name="yanHuaJianHua"
-      >
-        <Input
-          className="nut-input-text"
-          placeholder=""
-          type="text"
-        />
-      </Form.Item>
-
-      <Form.Item
-        required
-        label="全盐量"
-        initialValue={pattern.quanYanLiang}
-        name="quanYanLiang"
-      >
-        <Input
-          className="nut-input-text"
-          placeholder=""
-          type="text"
-        />
-      </Form.Item>
-
-      <Form.Item
-        required
-        label="有机质含量"
-        initialValue={pattern.youJiZhiHanLiang}
-        name="youJiZhiHanLiang"
-      >
-        <Input
-          className="nut-input-text"
-          placeholder=""
-          type="text"
-        />
-      </Form.Item>
-
-      <Form.Item
-        required
-        label="EC值"
-        initialValue={pattern.EC}
-        name="EC"
-      >
-        <Input
-          className="nut-input-text"
-          placeholder=""
-          type="text"
-        />
-      </Form.Item>
-
-      <Form.Item
-        required
-        label="PH值"
-        initialValue={pattern.PH}
-        name="PH"
-      >
-        <Input
-          className="nut-input-text"
-          placeholder=""
-          type="text"
-        />
-      </Form.Item>
-
+      <View className="label">其它指标</View>
       <Form.Item
         required
         label="灌溉方式"
@@ -829,20 +852,6 @@ function Pattern() {
           placeholder=""
           type="text"
         />
-      </Form.Item>
-
-      <Form.Item
-         label="田块照片"
-         name="files"
-      >
-       <Uploader
-         name="upload"
-         xhrState={200}
-         // maxCount="9" multiple="true"
-         url={Env.uploadUrl}
-         onSuccess={onSuccess}
-         onFailure={onFailure}
-       />
       </Form.Item>
     </Form>
   )
