@@ -37,7 +37,7 @@ function Edit() {
 
   return (
     <View className="">
-      <Tabs onChange={(v) => {setTabIndex(v)}} activeType="simple">
+      <Tabs autoHeight onChange={(v) => {setTabIndex(v)}} activeType="simple">
         <Tabs.TabPane key={0} title="模式概要"> <Pattern /> </Tabs.TabPane>
         <Tabs.TabPane key={1} title="理化本底"> <Soil /> </Tabs.TabPane>
         <Tabs.TabPane key={2} title="灌排协同"> <Irrigation /> </Tabs.TabPane>
