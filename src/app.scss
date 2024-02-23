@@ -132,3 +132,7 @@ form{
 .text-center{
   text-align: center;
 }
+.form{
+  --nutui-form-item-body-input-text-align: right;
+  --nutui-form-item-tip-text-align: right;
+}
