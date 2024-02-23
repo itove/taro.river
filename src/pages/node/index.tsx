@@ -44,7 +44,7 @@ function Index() {
   const getNodes = (uid, page = 1) => {
     // fetch my nodes
     Taro.request({
-      url: Env.apiUrl + 'nodes?lawyer=' + uid + '&page=' + page
+      url: Env.apiUrl + 'patterns?page=' + page
     })
     .then(res => {
       console.log(res)
@@ -66,7 +66,7 @@ function Index() {
   }
 
   const loadMore = (done: () => void) => {
-    console.log('load morm')
+    console.log('load more')
     setTimeout(() => {
       const curLen = nodeList.length
       for (let i = curLen; i < curLen + 10; i++) {

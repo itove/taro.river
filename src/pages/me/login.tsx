@@ -53,7 +53,6 @@ function Index() {
   return (
     <View className="nutui-react-demo">
       <View className="pt-12">
-          <View className="text-center mb-1">您需要登录才能管理数据</View>
           <Button type="success" className="btn m-auto" disabled={disabled} onClick={() => setIsVisible(!isVisible)}>
             微信登录
           </Button>
