@@ -34,7 +34,7 @@ function Index() {
         }
         setUser(u)
         if (u.avatar !== undefined) {
-          setAvatarUrl(Env.baseUrl + u.avatar)
+          setAvatarUrl(Env.imagesUrl + u.avatar)
         }
       })
     })
@@ -65,18 +65,6 @@ function Index() {
         align='center'
         extra={<Right size="12" />}
         onClick={goto}
-        />
-        <Cell
-        className='nutui-cell--clickable'
-        title='我的收藏'
-        align='center'
-        extra={<Right size="12" />}
-        />
-        <Cell
-        className='nutui-cell--clickable'
-        title='设置'
-        align='center'
-        extra={<Right size="12" />}
         />
       </Cell.Group>
     </View>

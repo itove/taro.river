@@ -26,7 +26,7 @@ function Index() {
         console.log(res)
         let user = res.data
         if (user.phone === undefined) {
-          setPhone('填写手机号')
+          setPhone('点击获取手机号')
         } else {
           setPhone(user.phone)
         }
@@ -35,7 +35,7 @@ function Index() {
         }
         setUser(user)
         if (user.avatar !== undefined) {
-          setAvatarUrl(Env.baseUrl + user.avatar)
+          setAvatarUrl(Env.imagesUrl + user.avatar)
         }
       })
     })
@@ -50,7 +50,7 @@ function Index() {
       name: 'upload',
       formData: {
         'type': 1,
-        'entityId': user.id
+        'uid': user.id
       }
     })
     .then(res => {
@@ -60,6 +60,7 @@ function Index() {
 
   const onGetphonenumber = (e) => {
     const d = e.detail
+    console.log(d)
     if (d.code !== undefined) {
       Taro.request({
         method: 'POST',
