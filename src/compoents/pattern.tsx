@@ -41,12 +41,16 @@ function Pattern() {
         form.setFieldsValue({
           name: pattern.name,
           SN: pattern.SN,
-          files: [{
-            url: Env.imagesUrl + pattern.image,
-            status: 'success',
-            type: 'image',
-          }],
         })
+        if (pattern.image !== undefined) {
+          form.setFieldsValue({
+            files: [{
+              url: Env.imagesUrl + pattern.image,
+              status: 'success',
+              type: 'image',
+            }],
+          })
+        }
       })
     }
   }, [])
@@ -88,15 +92,23 @@ function Pattern() {
     if (data.touRu !== undefined) data.touRu = Number(data.touRu)
     if (data.chanChu !== undefined) data.chanChu = Number(data.chanChu)
     console.log(data)
-    Taro.request({
-      method: 'PATCH',
-      url: Env.apiUrl + 'patterns/' + pid,
-      header: {
+    let method = 'POST'
+    let url = Env.apiUrl + 'patterns'
+    let header = {}
+    if (!isNew) {
+      method = 'PATCH'
+      url = Env.apiUrl + 'patterns/' + pid
+      header = {
         'content-type': 'application/merge-patch+json'
-      },
+      }
+    }
+    Taro.request({
+      method,
+      url,
+      header,
       data
     }).then((res) => {
-      if (res.statusCode === 200) {
+      if (res.statusCode === 200 || res.statusCode === 201) {
         Taro.showToast({
           title: '提交成功',
           icon: 'success',
