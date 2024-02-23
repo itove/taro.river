@@ -3,6 +3,7 @@ export default defineAppConfig({
     'pages/node/index',
     'pages/pattern/index',
     'pages/pattern/edit',
+    'pages/pattern/new',
     'pages/node/new',
     'pages/me/index',
     'pages/me/info',
@@ -28,7 +29,7 @@ export default defineAppConfig({
         "selectedIconPath": './icon/home-fill.png'
       },
       {
-        "pagePath": "pages/node/new",
+        "pagePath": "pages/pattern/new",
         "iconPath": './icon/plus-circle.png',
         "selectedIconPath": './icon/plus-circle-fill.png'
       },

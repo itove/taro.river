@@ -27,6 +27,13 @@ import Cost from '../../compoents/cost'
 function Edit() {
   const [tabIndex, setTabIndex] = useState(0)
   const [form] = Form.useForm()
+  const [pid, setPid] = useState(0)
+
+  useEffect(() => {
+    const instance = Taro.getCurrentInstance();
+    const pid = instance.router.params.pid
+    setPid(pid)
+  }, [])
 
   return (
     <View className="">
