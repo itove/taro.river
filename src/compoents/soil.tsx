@@ -17,7 +17,6 @@ import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../env'
 import SoilForm from './soilForm'
-import { ArrowDown } from '@nutui/icons-react-taro'
 
 function Soil({ pattern }) {
   const [index, setIndex] = useState(0)
