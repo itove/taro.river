@@ -21,7 +21,7 @@ function FertilizerForm({ index }) {
     <>
       <Form.Item
         label="日期"
-        name="name"
+        name={"date-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -34,7 +34,7 @@ function FertilizerForm({ index }) {
       </Form.Item>
       <Form.Item
         label="措施1"
-        name="name"
+        name={"cuoShi1-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -47,7 +47,7 @@ function FertilizerForm({ index }) {
       </Form.Item>
       <Form.Item
         label="施用量/kg/亩"
-        name="name"
+        name={"shiYongLiang1-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -60,7 +60,7 @@ function FertilizerForm({ index }) {
       </Form.Item>
       <Form.Item
         label="措施2"
-        name="name"
+        name={"cuoShi2-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -73,7 +73,7 @@ function FertilizerForm({ index }) {
       </Form.Item>
       <Form.Item
         label="施用量/kg/亩"
-        name="name"
+        name={"shiYongLiang2-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -86,7 +86,7 @@ function FertilizerForm({ index }) {
       </Form.Item>
       <Form.Item
         label="措施3"
-        name="name"
+        name={"cuoShi3-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -99,7 +99,7 @@ function FertilizerForm({ index }) {
       </Form.Item>
       <Form.Item
         label="施用量/kg/亩"
-        name="name"
+        name={"shiYongLiang3-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -112,7 +112,7 @@ function FertilizerForm({ index }) {
       </Form.Item>
       <Form.Item
         label="措施4"
-        name="name"
+        name={"cuoShi4-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -125,7 +125,7 @@ function FertilizerForm({ index }) {
       </Form.Item>
       <Form.Item
         label="施用量/kg/亩"
-        name="name"
+        name={"shiYongLiang4-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },

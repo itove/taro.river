@@ -21,7 +21,7 @@ function IrrigationForm({ index }) {
     <>
       <Form.Item
         label="日期"
-        name="name"
+        name={"date-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -34,7 +34,7 @@ function IrrigationForm({ index }) {
       </Form.Item>
       <Form.Item
         label="灌水量/m³/亩"
-        name="name"
+        name={"guanShuiLiang-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },

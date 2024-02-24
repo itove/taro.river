@@ -21,7 +21,7 @@ function SeedForm({ index }) {
     <>
       <Form.Item
         label="日期"
-        name="name"
+        name={"date-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -34,7 +34,7 @@ function SeedForm({ index }) {
       </Form.Item>
       <Form.Item
         label="农艺技术"
-        name="name"
+        name={"nongYiJiShu-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -47,7 +47,7 @@ function SeedForm({ index }) {
       </Form.Item>
       <Form.Item
         label="物理结构改善"
-        name="name"
+        name={"wuLiJieGouGaiShan-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -60,7 +60,7 @@ function SeedForm({ index }) {
       </Form.Item>
       <Form.Item
         label="措施3"
-        name="name"
+        name={"cuoShi3-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },

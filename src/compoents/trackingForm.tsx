@@ -21,7 +21,7 @@ function TrackingForm({ index }) {
     <>
       <Form.Item
         label="方法设备"
-        name="name"
+        name={"fangFaSheBei-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -34,7 +34,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="监测频次"
-        name="name"
+        name={"jianCePinCi-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -47,7 +47,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="现地远程"
-        name="name"
+        name={"xianDiYuanCheng-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -60,7 +60,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="监测专题"
-        name="name"
+        name={"jianCeZhuanTi-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
