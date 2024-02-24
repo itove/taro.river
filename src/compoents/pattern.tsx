@@ -16,43 +16,21 @@ import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../env'
 
-function Pattern() {
+function Pattern({ pattern, isNew }) {
   const [form] = Form.useForm()
-  const [isNew, setIsNew] = useState(true)
-  const [disabled, setDisabled] = useState(false)
-  const [pid, setPid] = useState(undefined)
-  const [pattern, setPattern] = useState({})
 
   useEffect(() => {
-    const instance = Taro.getCurrentInstance();
-    const pid = instance.router.params.pid
-    setPid(pid)
-    if (pid !== undefined) {
-      setIsNew(false)
-      setDisabled(true)
-      Taro.request({
-        url: Env.apiUrl + 'patterns/' + pid
-      })
-      .then(res => {
-        const pattern = res.data
-        setPattern(pattern)
-        console.log(pattern)
-        form.setFieldsValue({
-          name: pattern.name,
-          SN: pattern.SN,
-        })
-        if (pattern.image !== undefined) {
-          form.setFieldsValue({
-            files: [{
-              url: Env.imagesUrl + pattern.image,
-              status: 'success',
-              type: 'image',
-            }],
-          })
-        }
+    console.log(pattern)
+    if (pattern.image !== undefined) {
+      form.setFieldsValue({
+        files: [{
+          url: Env.imagesUrl + pattern.image,
+          status: 'success',
+          type: 'image',
+        }],
       })
     }
-  }, [])
+  }, [pattern])
 
   const onFailure = (res) => {
     console.log(res)
@@ -63,6 +41,7 @@ function Pattern() {
   }
 
   const onFinishFailed = v => {
+    console.log(v)
   }
 
   const formSubmit = data => {
@@ -96,7 +75,7 @@ function Pattern() {
     let header = {}
     if (!isNew) {
       method = 'PATCH'
-      url = Env.apiUrl + 'patterns/' + pid
+      url = Env.apiUrl + 'patterns/' + pattern.id
       header = {
         'content-type': 'application/merge-patch+json'
       }
@@ -144,14 +123,14 @@ function Pattern() {
         initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
-          { required: true, message: '请输入模式名称' },
+          { required: isNew, message: '请输入模式名称' },
         ]}
       >
         <Input
           className="nut-input-text"
           placeholder=""
           type="text"
-          disabled={disabled}
+          readOnly={!isNew}
         />
       </Form.Item>
 
@@ -161,14 +140,14 @@ function Pattern() {
         initialValue={pattern.SN}
         rules={[
           { max: 10, message: '不能超过10字符' },
-          { required: true, message: '请输入模式编号' },
+          { required: isNew, message: '请输入模式编号' },
         ]}
       >
         <Input
           className="nut-input-text"
           placeholder=""
           type="text"
-          disabled={disabled}
+          readOnly={!isNew}
         />
       </Form.Item>
 
@@ -234,6 +213,8 @@ function Pattern() {
          url={Env.uploadUrl}
          onSuccess={onSuccess}
          onFailure={onFailure}
+				 // defaultValue={files}
+				 // initialValue={files}
        />
       </Form.Item>
 
