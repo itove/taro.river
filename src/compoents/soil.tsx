@@ -10,7 +10,7 @@ import {
   InputNumber,
   Input,
   TextArea,
-  Collapse,
+  Menu,
   Tabs
 } from '@nutui/nutui-react-taro'
 import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
@@ -20,71 +20,26 @@ import SoilForm from './soilForm'
 import { ArrowDown } from '@nutui/icons-react-taro'
 
 function Soil({ pattern }) {
-  const [form] = Form.useForm()
+  const [index, setIndex] = useState(0)
 
-  const onFinishFailed = v => {
-  }
+  const options = [
+    { text: '0-20cm', value: 0 },
+    { text: '20-40cm', value: 1 },
+    { text: '40-60cm', value: 2 },
+    { text: '60-80cm', value: 3 },
+  ]
 
-  const formSubmit = data => {
-    data.entity = 'Soil'
-    console.log(data)
-    const method = 'PATCH'
-    const url = Env.apiUrl + 'updateOthers/' + pattern.id
-    const header = {
-      'content-type': 'application/merge-patch+json'
-    }
-    Taro.request({
-      method,
-      url,
-      header,
-      data
-    }).then((res) => {
-      if (res.statusCode === 200 || res.statusCode === 201) {
-        Taro.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 2000
-        }).then(() => {
-          Taro.reLaunch({ url: '/pages/node/index' })
-        })
-      } else {
-        Taro.showToast({
-          title: '系统错误',
-          icon: 'error',
-          duration: 2000
-        })
-        console.log('server error！' + res.errMsg)
-      }
-    })
+  const handleChange = v => {
+    setIndex(v.value)
   }
 
   return (
-    <Form
-      className="form"
-      form={form}
-      divider
-      // labelPosition="left"
-      onFinish={(values) => formSubmit(values)}
-      onFinishFailed={(values) => onFinishFailed(values)}
-      footer={
-        <Button formType="submit" block type="primary"> 保 存 </Button>
-      }
-    >
-      <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
-      <Collapse.Item title="0-20cm" name="1">
-        <SoilForm index={0} />
-      </Collapse.Item>
-      <Collapse.Item title="20-40cm" name="2">
-        <SoilForm index={1}/>
-      </Collapse.Item>
-      <Collapse.Item title="40-60cm" name="3">
-        <SoilForm index={2}/>
-      </Collapse.Item>
-      <Collapse.Item title="60-80cm" name="4">
-        <SoilForm index={3}/>
-      </Collapse.Item>
-    </Collapse>
-    </Form>
+    <>
+      <Menu>
+        <Menu.Item options={options} value={index} onChange={handleChange} />
+      </Menu>
+      <SoilForm index={index}/>
+    </>
   )
 }
 
