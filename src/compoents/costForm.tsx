@@ -16,12 +16,12 @@ import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../env'
 
-function TrackingForm({ index }) {
+function CostForm({ index }) {
   return (
     <>
       <Form.Item
         label="内容"
-        name="name"
+        name={"neiRong-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -34,7 +34,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="单位"
-        name="name"
+        name={"danwei-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -47,7 +47,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="总量"
-        name="name"
+        name={"zongLiang-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -60,7 +60,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="单价"
-        name="name"
+        name={"danJia-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -73,7 +73,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="总价"
-        name="name"
+        name={"zongJia-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -86,7 +86,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="方法"
-        name="name"
+        name={"fangFa-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -99,7 +99,7 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="名称"
-        name="name"
+        name={"mingCheng-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -112,7 +112,20 @@ function TrackingForm({ index }) {
       </Form.Item>
       <Form.Item
         label="施用量"
-        name="name"
+        name={"shiYongLiang-" + index}
+        // initialValue={pattern.name}
+        rules={[
+          { max: 50, message: '不能超过50字符' },
+        ]}
+      >
+        <Input
+          className="nut-input-text"
+          type="text"
+        />
+      </Form.Item>
+      <Form.Item
+        label="施用量"
+        name={"chanLiang-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -127,4 +140,4 @@ function TrackingForm({ index }) {
   )
 }
 
-export default TrackingForm
+export default CostForm
