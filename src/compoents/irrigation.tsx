@@ -19,20 +19,16 @@ import { Env } from '../env'
 import IrrigationForm from './irrigationForm'
 import { ArrowDown } from '@nutui/icons-react-taro'
 
-function Irrigation() {
+function Irrigation({ pattern }) {
   const [form] = Form.useForm()
 
   const formSubmit = data => {
+    data.entity = 'Irrigation'
     console.log(data)
-    let method = 'POST'
-    let url = Env.apiUrl + 'patterns'
-    let header = {}
-    if (!isNew) {
-      method = 'PATCH'
-      url = Env.apiUrl + 'patterns/' + pid
-      header = {
-        'content-type': 'application/merge-patch+json'
-      }
+    const method = 'PATCH'
+    const url = Env.apiUrl + 'updateOthers/' + pattern.id
+    const header = {
+      'content-type': 'application/merge-patch+json'
     }
     Taro.request({
       method,

@@ -19,20 +19,16 @@ import { Env } from '../env'
 import SeedForm from './seedForm'
 import { ArrowDown } from '@nutui/icons-react-taro'
 
-function Seed() {
+function Seed({ pattern }) {
   const [form] = Form.useForm()
 
   const formSubmit = data => {
+    data.entity = 'Seed'
     console.log(data)
-    let method = 'POST'
-    let url = Env.apiUrl + 'patterns'
-    let header = {}
-    if (!isNew) {
-      method = 'PATCH'
-      url = Env.apiUrl + 'patterns/' + pid
-      header = {
-        'content-type': 'application/merge-patch+json'
-      }
+    const method = 'PATCH'
+    const url = Env.apiUrl + 'updateOthers/' + pattern.id
+    const header = {
+      'content-type': 'application/merge-patch+json'
     }
     Taro.request({
       method,

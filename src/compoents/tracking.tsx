@@ -19,20 +19,16 @@ import { Env } from '../env'
 import TrackingForm from './trackingForm'
 import { ArrowDown } from '@nutui/icons-react-taro'
 
-function Tracking() {
+function Tracking({ pattern }) {
   const [form] = Form.useForm()
 
   const formSubmit = data => {
+    data.entity = 'Tracking'
     console.log(data)
-    let method = 'POST'
-    let url = Env.apiUrl + 'patterns'
-    let header = {}
-    if (!isNew) {
-      method = 'PATCH'
-      url = Env.apiUrl + 'patterns/' + pid
-      header = {
-        'content-type': 'application/merge-patch+json'
-      }
+    const method = 'PATCH'
+    const url = Env.apiUrl + 'updateOthers/' + pattern.id
+    const header = {
+      'content-type': 'application/merge-patch+json'
     }
     Taro.request({
       method,

@@ -16,7 +16,7 @@ import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../env'
 
-function IrrigationForm() {
+function IrrigationForm({ index }) {
   return (
     <>
       <Form.Item

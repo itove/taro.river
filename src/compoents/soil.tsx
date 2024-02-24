@@ -26,7 +26,7 @@ function Soil({ pattern }) {
   }
 
   const formSubmit = data => {
-    data.entity = 'soil'
+    data.entity = 'Soil'
     console.log(data)
     const method = 'PATCH'
     const url = Env.apiUrl + 'updateOthers/' + pattern.id
