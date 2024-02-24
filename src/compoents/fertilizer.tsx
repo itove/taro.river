@@ -10,84 +10,37 @@ import {
   InputNumber,
   Input,
   TextArea,
-  Collapse,
+  Menu,
   Tabs
 } from '@nutui/nutui-react-taro'
 import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../env'
 import FertilizerForm from './fertilizerForm'
-import { ArrowDown } from '@nutui/icons-react-taro'
 
 function Fertilizer({ pattern }) {
-  const [form] = Form.useForm()
+  const [index, setIndex] = useState(0)
 
-  const formSubmit = data => {
-    data.entity = 'Fertilizer'
-    console.log(data)
-    const method = 'PATCH'
-    const url = Env.apiUrl + 'updateOthers/' + pattern.id
-    const header = {
-      'content-type': 'application/merge-patch+json'
-    }
-    Taro.request({
-      method,
-      url,
-      header,
-      data
-    }).then((res) => {
-      if (res.statusCode === 200 || res.statusCode === 201) {
-        Taro.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 2000
-        }).then(() => {
-          Taro.reLaunch({ url: '/pages/node/index' })
-        })
-      } else {
-        Taro.showToast({
-          title: '系统错误',
-          icon: 'error',
-          duration: 2000
-        })
-        console.log('server error！' + res.errMsg)
-      }
-    })
+  const options = [
+    { text: '第1次', value: 0 },
+    { text: '第2次', value: 1 },
+    { text: '第3次', value: 2 },
+    { text: '第4次', value: 3 },
+    { text: '第5次', value: 4 },
+    { text: '第6次', value: 5 },
+  ]
+
+  const handleChange = v => {
+    setIndex(v.value)
   }
 
   return (
-    <Form
-      className="form"
-      form={form}
-      divider
-      // labelPosition="left"
-      onFinish={(values) => formSubmit(values)}
-      onFinishFailed={(values) => onFinishFailed(values)}
-      footer={
-        <Button formType="submit" block type="primary"> 保 存 </Button>
-      }
-    >
-      <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
-      <Collapse.Item title="第1次" name="1">
-        <FertilizerForm index={0}/>
-      </Collapse.Item>
-      <Collapse.Item title="第2次" name="2">
-        <FertilizerForm index={1}/>
-      </Collapse.Item>
-      <Collapse.Item title="第3次" name="3">
-        <FertilizerForm index={2}/>
-      </Collapse.Item>
-      <Collapse.Item title="第4次" name="4">
-        <FertilizerForm index={3}/>
-      </Collapse.Item>
-      <Collapse.Item title="第5次" name="5">
-        <FertilizerForm index={4}/>
-      </Collapse.Item>
-      <Collapse.Item title="第6次" name="6">
-        <FertilizerForm index={5}/>
-      </Collapse.Item>
-    </Collapse>
-    </Form>
+    <>
+      <Menu>
+        <Menu.Item options={options} value={index} onChange={handleChange} />
+      </Menu>
+      <FertilizerForm index={index}/>
+    </>
   )
 }
 

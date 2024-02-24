@@ -17,8 +17,57 @@ import Taro from '@tarojs/taro'
 import { Env } from '../env'
 
 function FertilizerForm({ index }) {
+  const [form] = Form.useForm()
+
+  useEffect(() => {
+    console.log(index)
+  }, [index])
+
+  const formSubmit = data => {
+    data.entity = 'Fertilizer'
+    console.log(data)
+    const method = 'PATCH'
+    const url = Env.apiUrl + 'updateOthers/' + pattern.id
+    const header = {
+      'content-type': 'application/merge-patch+json'
+    }
+    Taro.request({
+      method,
+      url,
+      header,
+      data
+    }).then((res) => {
+      if (res.statusCode === 200 || res.statusCode === 201) {
+        Taro.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000
+        }).then(() => {
+          Taro.reLaunch({ url: '/pages/node/index' })
+        })
+      } else {
+        Taro.showToast({
+          title: '系统错误',
+          icon: 'error',
+          duration: 2000
+        })
+        console.log('server error！' + res.errMsg)
+      }
+    })
+  }
+
   return (
-    <>
+    <Form
+      className="form"
+      form={form}
+      divider
+      // labelPosition="left"
+      onFinish={(values) => formSubmit(values)}
+      onFinishFailed={(values) => onFinishFailed(values)}
+      footer={
+        <Button formType="submit" block type="primary"> 保 存 </Button>
+      }
+    >
       <Form.Item
         label="日期"
         name={"date-" + index}
@@ -136,7 +185,7 @@ function FertilizerForm({ index }) {
           type="text"
         />
       </Form.Item>
-    </>
+    </Form>
   )
 }
 
