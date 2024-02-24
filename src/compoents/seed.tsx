@@ -10,90 +10,39 @@ import {
   InputNumber,
   Input,
   TextArea,
-  Collapse,
+  Menu,
   Tabs
 } from '@nutui/nutui-react-taro'
 import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../env'
 import SeedForm from './seedForm'
-import { ArrowDown } from '@nutui/icons-react-taro'
 
 function Seed({ pattern }) {
-  const [form] = Form.useForm()
+  const [index, setIndex] = useState(0)
 
-  const formSubmit = data => {
-    data.entity = 'Seed'
-    console.log(data)
-    const method = 'PATCH'
-    const url = Env.apiUrl + 'updateOthers/' + pattern.id
-    const header = {
-      'content-type': 'application/merge-patch+json'
-    }
-    Taro.request({
-      method,
-      url,
-      header,
-      data
-    }).then((res) => {
-      if (res.statusCode === 200 || res.statusCode === 201) {
-        Taro.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 2000
-        }).then(() => {
-          Taro.reLaunch({ url: '/pages/node/index' })
-        })
-      } else {
-        Taro.showToast({
-          title: '系统错误',
-          icon: 'error',
-          duration: 2000
-        })
-        console.log('server error！' + res.errMsg)
-      }
-    })
+  const options = [
+    { text: '第1次', value: 0 },
+    { text: '第2次', value: 1 },
+    { text: '第3次', value: 2 },
+    { text: '第4次', value: 3 },
+    { text: '第5次', value: 4 },
+    { text: '第6次', value: 5 },
+    { text: '第7次', value: 6 },
+    { text: '第8次', value: 7 },
+  ]
+
+  const handleChange = v => {
+    setIndex(v.value)
   }
 
   return (
-    <Form
-      className="form"
-      form={form}
-      divider
-      // labelPosition="left"
-      onFinish={(values) => formSubmit(values)}
-      onFinishFailed={(values) => onFinishFailed(values)}
-      footer={
-        <Button formType="submit" block type="primary"> 保 存 </Button>
-      }
-    >
-      <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
-      <Collapse.Item title="第1次" name="1">
-        <SeedForm index={0}/>
-      </Collapse.Item>
-      <Collapse.Item title="第2次" name="2">
-        <SeedForm index={1}/>
-      </Collapse.Item>
-      <Collapse.Item title="第3次" name="3">
-        <SeedForm index={2}/>
-      </Collapse.Item>
-      <Collapse.Item title="第4次" name="4">
-        <SeedForm index={3}/>
-      </Collapse.Item>
-      <Collapse.Item title="第5次" name="5">
-        <SeedForm index={4}/>
-      </Collapse.Item>
-      <Collapse.Item title="第6次" name="6">
-        <SeedForm index={5}/>
-      </Collapse.Item>
-      <Collapse.Item title="第7次" name="7">
-        <SeedForm index={6}/>
-      </Collapse.Item>
-      <Collapse.Item title="第8次" name="8">
-        <SeedForm index={7}/>
-      </Collapse.Item>
-    </Collapse>
-    </Form>
+    <>
+      <Menu>
+        <Menu.Item options={options} value={index} onChange={handleChange} />
+      </Menu>
+      <SeedForm index={index}/>
+    </>
   )
 }
 
