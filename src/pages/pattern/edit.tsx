@@ -54,12 +54,12 @@ function Edit() {
     <View className="">
       <Tabs autoHeight onChange={(v) => {setTabIndex(v)}} activeType="simple">
         <Tabs.TabPane key={0} title="模式概要"> <Pattern pattern={pattern} isNew={isNew} /> </Tabs.TabPane>
-        <Tabs.TabPane disabled={disabled} key={1} title="理化本底"> <Soil /> </Tabs.TabPane>
-        <Tabs.TabPane disabled={disabled} key={2} title="灌排协同"> <Irrigation /> </Tabs.TabPane>
-        <Tabs.TabPane disabled={disabled} key={3} title="消障培肥"> <Fertilizer /> </Tabs.TabPane>
-        <Tabs.TabPane disabled={disabled} key={4} title="种子农艺"> <Seed /> </Tabs.TabPane>
-        <Tabs.TabPane disabled={disabled} key={5} title="跟踪监测"> <Tracking /> </Tabs.TabPane>
-        <Tabs.TabPane disabled={disabled} key={6} title="成本效益"> <Cost /> </Tabs.TabPane>
+        <Tabs.TabPane disabled={disabled} key={1} title="理化本底"> <Soil pattern={pattern} /> </Tabs.TabPane>
+        <Tabs.TabPane disabled={disabled} key={2} title="灌排协同"> <Irrigation pattern={pattern} /> </Tabs.TabPane>
+        <Tabs.TabPane disabled={disabled} key={3} title="消障培肥"> <Fertilizer pattern={pattern} /> </Tabs.TabPane>
+        <Tabs.TabPane disabled={disabled} key={4} title="种子农艺"> <Seed pattern={pattern} /> </Tabs.TabPane>
+        <Tabs.TabPane disabled={disabled} key={5} title="跟踪监测"> <Tracking pattern={pattern} /> </Tabs.TabPane>
+        <Tabs.TabPane disabled={disabled} key={6} title="成本效益"> <Cost pattern={pattern} /> </Tabs.TabPane>
 			</Tabs>
     </View>
   )

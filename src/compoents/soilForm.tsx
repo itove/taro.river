@@ -16,13 +16,13 @@ import { Right, Uploader as Plus } from '@nutui/icons-react-taro'
 import Taro from '@tarojs/taro'
 import { Env } from '../env'
 
-function SoilForm() {
+function SoilForm({ index }) {
   return (
     <>
       <View className="label">土壤物理</View>
       <Form.Item
         label="粘:粉:砂"
-        name="name"
+        name={"nianFenSha-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -35,7 +35,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="土壤质地"
-        name="name"
+        name={"tuRangZhiD-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -48,7 +48,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="干容重(mg/cm³)"
-        name="name"
+        name={"ganRongLiang-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -61,7 +61,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="孔隙度(%)"
-        name="name"
+        name={"kongXiDu-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -75,7 +75,7 @@ function SoilForm() {
       <View className="label">土壤养分</View>
       <Form.Item
         label="全氮(g/kg)"
-        name="name"
+        name={"quanDan-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -88,7 +88,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="全磷(g/kg)"
-        name="name"
+        name={"quanLin-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -101,7 +101,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="全钾(g/kg)"
-        name="name"
+        name={"quanJia-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -114,7 +114,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="有机质(g/kg)"
-        name="name"
+        name={"youJiZhi-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -127,7 +127,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="硝态氮(g/kg)"
-        name="name"
+        name={"xiaoTaiDan-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -140,7 +140,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="氨态氮(g/kg)"
-        name="name"
+        name={"anTaiDan-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -153,7 +153,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="有效磷(mg/kg)"
-        name="name"
+        name={"youXiaoLin-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -166,7 +166,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="有效钾(mg/kg)"
-        name="name"
+        name={"youXiaoJia-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -179,7 +179,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="碱解氮(mg/kg)"
-        name="name"
+        name={"jianJieDan-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -192,7 +192,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="全盐量(g/kg)"
-        name="name"
+        name={"quanYanLiang-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -205,7 +205,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="EC(ds/m)"
-        name="name"
+        name={"EC-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -218,7 +218,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="pH"
-        name="name"
+        name={"PH-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -232,7 +232,7 @@ function SoilForm() {
       <View className="label">水力特性参数</View>
       <Form.Item
         label="饱和含水率(cm³/cm³)"
-        name="name"
+        name={"baoHeHanShuiLv-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -245,7 +245,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="饱和导水率(cm/d)"
-        name="name"
+        name={"baoHeDaoShuiLv-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },
@@ -258,7 +258,7 @@ function SoilForm() {
       </Form.Item>
       <Form.Item
         label="田间持水量(cm³/cm³)"
-        name="name"
+        name={"tianJianChiShuiLiang-" + index}
         // initialValue={pattern.name}
         rules={[
           { max: 50, message: '不能超过50字符' },

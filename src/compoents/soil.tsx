@@ -19,23 +19,19 @@ import { Env } from '../env'
 import SoilForm from './soilForm'
 import { ArrowDown } from '@nutui/icons-react-taro'
 
-function Soil() {
+function Soil({ pattern }) {
   const [form] = Form.useForm()
 
   const onFinishFailed = v => {
   }
 
   const formSubmit = data => {
+    data.entity = 'soil'
     console.log(data)
-    let method = 'POST'
-    let url = Env.apiUrl + 'patterns'
-    let header = {}
-    if (!isNew) {
-      method = 'PATCH'
-      url = Env.apiUrl + 'patterns/' + pid
-      header = {
-        'content-type': 'application/merge-patch+json'
-      }
+    const method = 'PATCH'
+    const url = Env.apiUrl + 'updateOthers/' + pattern.id
+    const header = {
+      'content-type': 'application/merge-patch+json'
     }
     Taro.request({
       method,
@@ -76,16 +72,16 @@ function Soil() {
     >
       <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
       <Collapse.Item title="0-20cm" name="1">
-        <SoilForm />
+        <SoilForm index={0} />
       </Collapse.Item>
       <Collapse.Item title="20-40cm" name="2">
-        <SoilForm />
+        <SoilForm index={1}/>
       </Collapse.Item>
       <Collapse.Item title="40-60cm" name="3">
-        <SoilForm />
+        <SoilForm index={2}/>
       </Collapse.Item>
       <Collapse.Item title="60-80cm" name="4">
-        <SoilForm />
+        <SoilForm index={3}/>
       </Collapse.Item>
     </Collapse>
     </Form>
