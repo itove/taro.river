@@ -69,46 +69,46 @@ function Cost({ pattern }) {
     >
       <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
       <Collapse.Item title="高标准农田建设" name="1">
-        <CostForm />
+        <CostForm index={0} />
       </Collapse.Item>
       <Collapse.Item title="平田整地" name="2">
-        <CostForm />
+        <CostForm index={1} />
       </Collapse.Item>
       <Collapse.Item title="播种" name="3">
-        <CostForm />
+        <CostForm index={2}/>
       </Collapse.Item>
       <Collapse.Item title="灌溉排水" name="4">
-        <CostForm />
+        <CostForm index={3}/>
       </Collapse.Item>
       <Collapse.Item title="施肥1" name="5">
-        <CostForm />
+        <CostForm index={4}/>
       </Collapse.Item>
       <Collapse.Item title="施肥2" name="6">
-        <CostForm />
+        <CostForm index={5}/>
       </Collapse.Item>
       <Collapse.Item title="施肥3" name="7">
-        <CostForm />
+        <CostForm index={6}/>
       </Collapse.Item>
       <Collapse.Item title="管护1" name="8">
-        <CostForm />
+        <CostForm index={7}/>
       </Collapse.Item>
       <Collapse.Item title="管护2" name="9">
-        <CostForm />
+        <CostForm index={8}/>
       </Collapse.Item>
       <Collapse.Item title="管护3" name="10">
-        <CostForm />
+        <CostForm index={9}/>
       </Collapse.Item>
       <Collapse.Item title="产品1" name="11">
-        <CostForm />
+        <CostForm index={10}/>
       </Collapse.Item>
       <Collapse.Item title="产品2" name="12">
-        <CostForm />
+        <CostForm index={11}/>
       </Collapse.Item>
       <Collapse.Item title="产品3" name="13">
-        <CostForm />
+        <CostForm index={12}/>
       </Collapse.Item>
       <Collapse.Item title="产品4" name="14">
-        <CostForm />
+        <CostForm index={13}/>
       </Collapse.Item>
     </Collapse>
     </Form>

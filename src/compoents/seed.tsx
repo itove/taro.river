@@ -69,28 +69,28 @@ function Seed({ pattern }) {
     >
       <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
       <Collapse.Item title="第1次" name="1">
-        <SeedForm />
+        <SeedForm index={0}/>
       </Collapse.Item>
       <Collapse.Item title="第2次" name="2">
-        <SeedForm />
+        <SeedForm index={1}/>
       </Collapse.Item>
       <Collapse.Item title="第3次" name="3">
-        <SeedForm />
+        <SeedForm index={2}/>
       </Collapse.Item>
       <Collapse.Item title="第4次" name="4">
-        <SeedForm />
+        <SeedForm index={3}/>
       </Collapse.Item>
       <Collapse.Item title="第5次" name="5">
-        <SeedForm />
+        <SeedForm index={4}/>
       </Collapse.Item>
       <Collapse.Item title="第6次" name="6">
-        <SeedForm />
+        <SeedForm index={5}/>
       </Collapse.Item>
       <Collapse.Item title="第7次" name="7">
-        <SeedForm />
+        <SeedForm index={6}/>
       </Collapse.Item>
       <Collapse.Item title="第8次" name="8">
-        <SeedForm />
+        <SeedForm index={7}/>
       </Collapse.Item>
     </Collapse>
     </Form>

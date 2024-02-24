@@ -69,25 +69,25 @@ function Tracking({ pattern }) {
     >
       <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
       <Collapse.Item title="1.气象水文环境" name="1">
-        <TrackingForm />
+        <TrackingForm index={0}/>
       </Collapse.Item>
       <Collapse.Item title="2.灌溉" name="2">
-        <TrackingForm />
+        <TrackingForm index={1}/>
       </Collapse.Item>
       <Collapse.Item title="3.排水" name="3">
-        <TrackingForm />
+        <TrackingForm index={2}/>
       </Collapse.Item>
       <Collapse.Item title="4.施肥" name="4">
-        <TrackingForm />
+        <TrackingForm index={3}/>
       </Collapse.Item>
       <Collapse.Item title="5.水分运动" name="5">
-        <TrackingForm />
+        <TrackingForm index={4}/>
       </Collapse.Item>
       <Collapse.Item title="6.盐分运动" name="6">
-        <TrackingForm />
+        <TrackingForm index={5}/>
       </Collapse.Item>
       <Collapse.Item title="7.作物生长" name="7">
-        <TrackingForm />
+        <TrackingForm index={6}/>
       </Collapse.Item>
     </Collapse>
     </Form>

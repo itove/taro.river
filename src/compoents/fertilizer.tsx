@@ -69,22 +69,22 @@ function Fertilizer({ pattern }) {
     >
       <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
       <Collapse.Item title="第1次" name="1">
-        <FertilizerForm />
+        <FertilizerForm index={0}/>
       </Collapse.Item>
       <Collapse.Item title="第2次" name="2">
-        <FertilizerForm />
+        <FertilizerForm index={1}/>
       </Collapse.Item>
       <Collapse.Item title="第3次" name="3">
-        <FertilizerForm />
+        <FertilizerForm index={2}/>
       </Collapse.Item>
       <Collapse.Item title="第4次" name="4">
-        <FertilizerForm />
+        <FertilizerForm index={3}/>
       </Collapse.Item>
       <Collapse.Item title="第5次" name="5">
-        <FertilizerForm />
+        <FertilizerForm index={4}/>
       </Collapse.Item>
       <Collapse.Item title="第6次" name="6">
-        <FertilizerForm />
+        <FertilizerForm index={5}/>
       </Collapse.Item>
     </Collapse>
     </Form>

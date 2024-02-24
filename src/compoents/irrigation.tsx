@@ -69,40 +69,40 @@ function Irrigation({ pattern }) {
     >
       <Collapse defaultActiveName={['1']} expandIcon={<ArrowDown size="12"/>}>
       <Collapse.Item title="第1次" name="1">
-        <IrrigationForm />
+        <IrrigationForm index={0}/>
       </Collapse.Item>
       <Collapse.Item title="第2次" name="2">
-        <IrrigationForm />
+        <IrrigationForm index={1}/>
       </Collapse.Item>
       <Collapse.Item title="第3次" name="3">
-        <IrrigationForm />
+        <IrrigationForm index={2}/>
       </Collapse.Item>
       <Collapse.Item title="第4次" name="4">
-        <IrrigationForm />
+        <IrrigationForm index={3}/>
       </Collapse.Item>
       <Collapse.Item title="第5次" name="5">
-        <IrrigationForm />
+        <IrrigationForm index={4}/>
       </Collapse.Item>
       <Collapse.Item title="第6次" name="6">
-        <IrrigationForm />
+        <IrrigationForm index={5}/>
       </Collapse.Item>
       <Collapse.Item title="第7次" name="7">
-        <IrrigationForm />
+        <IrrigationForm index={6}/>
       </Collapse.Item>
       <Collapse.Item title="第8次" name="8">
-        <IrrigationForm />
+        <IrrigationForm index={7}/>
       </Collapse.Item>
       <Collapse.Item title="第9次" name="9">
-        <IrrigationForm />
+        <IrrigationForm index={8}/>
       </Collapse.Item>
       <Collapse.Item title="第10次" name="10">
-        <IrrigationForm />
+        <IrrigationForm index={9}/>
       </Collapse.Item>
       <Collapse.Item title="第11次" name="11">
-        <IrrigationForm />
+        <IrrigationForm index={10}/>
       </Collapse.Item>
       <Collapse.Item title="第12次" name="12">
-        <IrrigationForm />
+        <IrrigationForm index={11}/>
       </Collapse.Item>
     </Collapse>
     </Form>
